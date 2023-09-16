@@ -1,0 +1,14 @@
+.installedApp {
+  height: calc(100vh - 74px);
+}
+
+.infrahiveIcon {
+  background-image: url(./icons/infrahive.svg);
+}
+
+.infrahiveHeader {
+  width: 24px;
+  height: 24px;
+  background: url(./icons/infrahive-header.svg) center center no-repeat;
+  background-size: contain;
+}
