@@ -420,9 +420,9 @@ const StepTwo = ({
   }, [segmentationType, indexType])
 
   return (
-    <div className='flex w-full h-full'>
-      <div ref={scrollRef} className='relative h-full w-full overflow-y-scroll'>
-        <div className={cn(s.pageHeader, scrolled && s.fixed)}>{t('datasetCreation.steps.two')}</div>
+    <div className='flex w-full h-full p-5 justify-evenly'>
+      <div ref={scrollRef} className='relative h-full border '>
+
         <div className={cn(s.form)}>
           <div className={s.label}>{t('datasetCreation.stepTwo.segmentation')}</div>
           <div className='max-w-[640px]'>
@@ -649,7 +649,7 @@ const StepTwo = ({
             {!isSetting
               ? (
                 <div className='flex items-center mt-8 py-2'>
-                  <Button onClick={() => onStepChange && onStepChange(-1)}>{t('datasetCreation.stepTwo.lastStep')}</Button>
+                  <Button onClick={() => onStepChange && onStepChange(-1)}>{'Back'}</Button>
                   <div className={s.divider} />
                   <Button type='primary' onClick={createHandle}>{t('datasetCreation.stepTwo.nextStep')}</Button>
                 </div>
@@ -665,7 +665,7 @@ const StepTwo = ({
       </div>
       {(showPreview)
         ? (
-          <div ref={previewScrollRef} className={cn(s.previewWrap, 'relativeh-full overflow-y-scroll border-l border-[#F2F4F7]')}>
+          <div ref={previewScrollRef} className={cn(s.previewWrap, 'relativeh-full overflow-auto border border-[#F2F4F7]')}>
             <div className={cn(s.previewHeader, previewScrolled && `${s.fixed} pb-3`)}>
               <div className='flex items-center justify-between px-8'>
                 <div className='grow flex items-center'>

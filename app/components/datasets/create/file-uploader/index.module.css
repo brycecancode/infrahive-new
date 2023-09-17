@@ -20,8 +20,8 @@
 .uploader {
   @apply relative box-border flex justify-center items-center mb-2;
   flex-direction: column;
-  max-width: 640px;
-  height: 80px;
+
+  height: 200px;
   background: #F9FAFB;
   border: 1px dashed #EAECF0;
   border-radius: 12px;
@@ -66,7 +66,7 @@
 .file {
   @apply box-border relative flex items-center justify-between;
   padding: 8px 12px 8px 8px;
-  max-width: 640px;
+
   height: 40px;
   background: #ffffff;
   border: 0.5px solid #EAECF0;

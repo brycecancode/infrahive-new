@@ -112,8 +112,8 @@ const DatasetUpdateForm = ({ datasetId }: DatasetUpdateFormProps) => {
     return <AppUnavailable code={500} unknownReason={t('datasetCreation.error.unavailable') as string} />
 
   return (
-    <div className='flex' style={{ height: 'calc(100vh - 56px)' }}>
-      <div className="flex flex-col w-56 overflow-y-auto bg-white border-r border-gray-200 shrink-0">
+    <div className='flex flex-col' style={{ height: 'calc(100vh - 56px)' }}>
+      <div className="flex  w-full overflow-y-auto bg-white border-r border-gray-200 shrink-0">
         <StepsNavBar step={step} datasetId={datasetId} />
       </div>
       <div className="grow bg-white">
@@ -154,7 +154,7 @@ const DatasetUpdateForm = ({ datasetId }: DatasetUpdateFormProps) => {
         await checkAPIKey()
         hideSetAPIkey()
       }} />}
-      {isShowDataSourceSetting && <AccountSetting activeTab="data-source" onCancel={hideDataSourceSetting}/>}
+      {isShowDataSourceSetting && <AccountSetting activeTab="data-source" onCancel={hideDataSourceSetting} />}
     </div>
   )
 }

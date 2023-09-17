@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  PencilSquareIcon,
-} from '@heroicons/react/24/outline'
+import AddIcon from '@mui/icons-material/Add'
 import cn from 'classnames'
 import Button from '../../../base/button'
 import List from './list'
+import s from './index.module.css'
 import AppInfo from '@/app/components/share/chat/sidebar/app-info'
 // import Card from './card'
 import type { ConversationItem, SiteInfo } from '@/models/share'
@@ -86,10 +85,13 @@ const Sidebar: FC<ISidebarProps> = ({
       className={
         cn(
           (isInstalledApp || isUniversalChat) ? 'tablet:h-[calc(100vh_-_74px)]' : 'tablet:h-[calc(100vh_-_3rem)]',
-          'shrink-0 flex flex-col bg-white pc:w-[244px] tablet:w-[192px] mobile:w-[240px]  border-r border-gray-200 mobile:h-screen',
+          'shrink-0 flex flex-col bg-white pc:w-[300px] tablet:w-[192px] mobile:w-[240px]  border-r border-gray-200 mobile:h-screen',
         )
       }
     >
+      <div className='flex items-center justify-center mb-8 w-full'>
+        <div className={s.logo} />
+      </div>
       {isInstalledApp && (
         <AppInfo
           className='my-4 px-4'
@@ -100,9 +102,10 @@ const Sidebar: FC<ISidebarProps> = ({
       )}
       <div className="flex flex-shrink-0 p-4 !pb-0">
         <Button
+          type="primary"
           onClick={() => { onCurrentIdChange('-1') }}
-          className="group block w-full flex-shrink-0 !justify-start !h-9 text-primary-600 items-center text-sm">
-          <PencilSquareIcon className="mr-2 h-4 w-4" /> {t('share.chat.newChat')}
+          className="group block w-full flex-shrink-0  !h-9 text-primary-600 items-center text-sm ">
+          <AddIcon style={{ marginRight: 5 }} /> New Chat
         </Button>
       </div>
       <div className={'flex-grow flex flex-col h-0 overflow-y-auto overflow-x-hidden'}>

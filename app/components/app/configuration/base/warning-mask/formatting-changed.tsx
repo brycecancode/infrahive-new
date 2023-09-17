@@ -1,10 +1,11 @@
 'use client'
-import React, { FC } from 'react'
+import type { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningMask from '.'
 import Button from '@/app/components/base/button'
 
-export interface IFormattingChangedProps {
+export type IFormattingChangedProps = {
   onConfirm: () => void
   onCancel: () => void
 }
@@ -17,7 +18,7 @@ const icon = (
 
 const FormattingChanged: FC<IFormattingChangedProps> = ({
   onConfirm,
-  onCancel
+  onCancel,
 }) => {
   const { t } = useTranslation()
 
@@ -28,7 +29,7 @@ const FormattingChanged: FC<IFormattingChangedProps> = ({
       footer={
         <div className='flex space-x-2'>
           <Button type='primary' className='flex items-center space-x-2' onClick={onConfirm}>
-            {icon}
+
             <span>{t('common.operation.refresh')}</span>
           </Button>
           <Button onClick={onCancel}>{t('common.operation.cancel') as string}</Button>

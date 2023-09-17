@@ -109,7 +109,7 @@ const FileUploader = ({
       })
       .catch(() => {
         notify({ type: 'error', message: t('datasetCreation.stepOne.uploader.failed') })
-        onFileUpdate(fileItem, -2, fileListCopy)
+        onFileUpdate(fileItem, -2, fileList)
         return Promise.resolve({ ...fileItem })
       })
       .finally()
@@ -218,15 +218,15 @@ const FileUploader = ({
         accept={ACCEPTS.join(',')}
         onChange={fileChangeHandle}
       />
-      <div className={cn(s.title, titleClassName)}>{t('datasetCreation.stepOne.uploader.title')}</div>
+
       <div ref={dropRef} className={cn(s.uploader, dragging && s.dragging)}>
         <div className='flex justify-center items-center h-6 mb-2'>
-          <span className={s.uploadIcon}/>
+          <span className={s.uploadIcon} />
           <span>{t('datasetCreation.stepOne.uploader.button')}</span>
           <label className={s.browse} onClick={selectHandle}>{t('datasetCreation.stepOne.uploader.browse')}</label>
         </div>
         <div className={s.tip}>{t('datasetCreation.stepOne.uploader.tip')}</div>
-        {dragging && <div ref={dragRef} className={s.draggingCover}/>}
+        {dragging && <div ref={dragRef} className={s.draggingCover} />}
       </div>
       <div className={s.fileList}>
         {fileList.map((fileItem, index) => (
@@ -240,10 +240,10 @@ const FileUploader = ({
             )}
           >
             {fileItem.progress < 100 && (
-              <div className={s.progressbar} style={{ width: `${fileItem.progress}%` }}/>
+              <div className={s.progressbar} style={{ width: `${fileItem.progress}%` }} />
             )}
             <div className={s.fileInfo}>
-              <div className={cn(s.fileIcon, s[getFileType(fileItem.file)])}/>
+              <div className={cn(s.fileIcon, s[getFileType(fileItem.file)])} />
               <div className={s.filename}>{fileItem.file.name}</div>
               <div className={s.size}>{getFileSize(fileItem.file.size)}</div>
             </div>
@@ -255,7 +255,7 @@ const FileUploader = ({
                 <div className={s.remove} onClick={(e) => {
                   e.stopPropagation()
                   removeFile(fileItem.fileID)
-                }}/>
+                }} />
               )}
             </div>
           </div>

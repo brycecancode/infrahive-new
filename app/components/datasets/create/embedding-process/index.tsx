@@ -6,15 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { omit } from 'lodash-es'
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
 import { useGetState } from 'ahooks'
-import cn from 'classnames'
-import s from './index.module.css'
 import { FieldInfo } from '@/app/components/datasets/documents/detail/metadata'
 import Button from '@/app/components/base/button'
-import type { FullDocumentDetail, IndexingStatusResponse, ProcessRuleResponse } from '@/models/datasets'
-import { formatNumber } from '@/utils/format'
+import type { DataSourceType, FullDocumentDetail, IndexingStatusResponse, ProcessRuleResponse } from '@/models/datasets'
 import { fetchIndexingStatusBatch as doFetchIndexingStatus, fetchIndexingEstimateBatch, fetchProcessRule } from '@/service/datasets'
-import { DataSourceType } from '@/models/datasets'
-import NotionIcon from '@/app/components/base/notion-icon'
 
 type Props = {
   datasetId: string
@@ -66,6 +61,7 @@ const RuleDetail: FC<{ sourceData?: ProcessRuleResponse }> = ({ sourceData }) =>
   }, [sourceData])
 
   return <div className='flex flex-col pt-8 pb-10 first:mt-0'>
+
     {Object.keys(segmentationRuleMap).map((field) => {
       return <FieldInfo
         key={field}
@@ -168,7 +164,7 @@ const EmbeddingProcess: FC<Props> = ({ datasetId, batchId, documents = [], index
 
   return (
     <>
-      <div className='h-5 flex justify-between items-center mb-5'>
+      {/* <div className='h-5 flex justify-between items-center mb-5'>
         <div className={s.embeddingStatus}>
           {isEmbedding && t('datasetDocuments.embedding.processing')}
           {isEmbeddingCompleted && t('datasetDocuments.embedding.completed')}
@@ -190,8 +186,8 @@ const EmbeddingProcess: FC<Props> = ({ datasetId, batchId, documents = [], index
             </div>
           )}
         </div>
-      </div>
-      <div className={s.progressContainer}>
+      </div> */}
+      {/* <div className={s.progressContainer}>
         {indexingStatusBatchDetail.map(indexingStatusDetail => (
           <div className={cn(
             s.sourceItem,
@@ -227,7 +223,7 @@ const EmbeddingProcess: FC<Props> = ({ datasetId, batchId, documents = [], index
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       <RuleDetail sourceData={ruleDetail} />
       <div className='flex items-center gap-2 mt-10'>
         <Button className='w-fit' type='primary' onClick={navToDocumentList}>

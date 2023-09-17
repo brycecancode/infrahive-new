@@ -310,6 +310,9 @@ export const upload = (options: any): Promise<any> => {
     ...options,
     headers: { ...defaultOptions.headers, ...options.headers },
   }
+  const accessToken = localStorage.getItem('mainToken')
+  if (accessToken)
+    options.headers.Authorization = `Bearer ${accessToken}`
   return new Promise((resolve, reject) => {
     const xhr = options.xhr
     xhr.open(options.method, options.url)

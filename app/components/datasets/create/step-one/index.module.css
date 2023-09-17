@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   left: 0;
-  padding: 42px 64px 12px;
+  padding: 12px 64px;
   font-weight: 600;
   font-size: 18px;
   line-height: 28px;
@@ -93,12 +93,15 @@
 }
 
 .submitButton {
+ 
+  align-content: end;
+  align-self: flex-end;
   width: 120px;
 }
 
 .dividerLine {
   margin: 32px 0;
-  max-width: 640px;
+
   height: 1px;
   background-color: #eaecf0;
 }
@@ -108,7 +111,7 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 18px;
-  color: #fed44d;
+  color:#fee799;
 }
 
 .OtherCreationOption::before {
@@ -117,8 +120,8 @@
   margin-right: 4px;
   width: 16px;
   height: 16px;
-  background: center no-repeat url(../assets/folder-plus.svg);
-  background-size: contain;
+
+
 }
 
 .notionConnectionTip {

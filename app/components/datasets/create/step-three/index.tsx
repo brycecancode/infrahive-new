@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import cn from 'classnames'
 import EmbeddingProcess from '../embedding-process'
 
+import { FieldInfo } from '../../documents/detail/metadata'
 import s from './index.module.css'
 import type { FullDocumentDetail, createDocumentResponse } from '@/models/datasets'
 
@@ -18,26 +18,30 @@ const StepThree = ({ datasetId, datasetName, indexingType, creationCache }: Step
   const { t } = useTranslation()
 
   return (
-    <div className='flex w-full h-full'>
-      <div className={'h-full w-full overflow-y-scroll px-16'}>
+    <div className='flex w-full h-full p-5 '>
+      <div className={'h-full w-full border  p-5 '}>
         <div className='max-w-[636px]'>
-          {!datasetId && (
-            <>
-              <div className={s.creationInfo}>
-                <div className={s.title}>{t('datasetCreation.stepThree.creationTitle')}</div>
-                <div className={s.content}>{t('datasetCreation.stepThree.creationContent')}</div>
-                <div className={s.label}>{t('datasetCreation.stepThree.label')}</div>
-                <div className={s.datasetName}>{datasetName || creationCache?.dataset?.name}</div>
-              </div>
-              <div className={s.dividerLine}/>
-            </>
-          )}
-          {datasetId && (
-            <div className={s.creationInfo}>
-              <div className={s.title}>{t('datasetCreation.stepThree.additionTitle')}</div>
-              <div className={s.content}>{`${t('datasetCreation.stepThree.additionP1')} ${datasetName || creationCache?.dataset?.name} ${t('datasetCreation.stepThree.additionP2')}`}</div>
-            </div>
-          )}
+
+          <div className="flex flex-col items-center py-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="30" fill="#7ED19F" />
+              <path d="M42.5009 18L23.951 39.2L16.001 31.25" fill="#7ED19F" />
+              <path
+                d="M42.5009 18L23.951 39.2L16.001 31.25"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <p className='mt-4'>Dataset Created</p>
+          </div>
+          {datasetId && <FieldInfo
+            label={'Dataset Name'}
+            displayedValue={datasetName || creationCache?.dataset?.name}
+
+          />}
+
           <EmbeddingProcess
             datasetId={datasetId || creationCache?.dataset?.id || ''}
             batchId={creationCache?.batch || ''}
@@ -46,12 +50,10 @@ const StepThree = ({ datasetId, datasetName, indexingType, creationCache }: Step
           />
         </div>
       </div>
-      <div className={cn(s.sideTip)}>
-        <div className={s.tipCard}>
-          <span className={s.icon}/>
-          <div className={s.title}>{t('datasetCreation.stepThree.sideTipTitle')}</div>
-          <div className={s.content}>{t('datasetCreation.stepThree.sideTipContent')}</div>
-        </div>
+      <div className='h-full w-full border  p-5 '>
+        <div className={s.title}>{t('datasetCreation.stepThree.sideTipTitle')}</div>
+        <div className={s.dividerLine} />
+        <div className={s.content}>{t('datasetCreation.stepThree.sideTipContent')}</div>
       </div>
     </div>
   )
