@@ -17,6 +17,7 @@ import I18n from '@/context/i18n'
 import { useAppContext } from '@/context/app-context'
 import Avatar from '@/app/components/base/avatar'
 import { useWorkspacesContext } from '@/context/workspace-context'
+import CommingSoon from '@/app/components/comming-soon'
 
 dayjs.extend(relativeTime)
 const MembersPage = () => {
@@ -36,6 +37,8 @@ const MembersPage = () => {
   const owner = accounts.filter(account => account.role === 'owner')?.[0]?.email === userProfile.email
   const { workspaces } = useWorkspacesContext()
   const currentWrokspace = workspaces.filter(item => item.current)?.[0]
+
+  return <CommingSoon />
 
   return (
     <>

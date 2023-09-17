@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { useContext } from 'use-context-selector'
-import Collapse from '../collapse'
 import type { IItem } from '../collapse'
 import s from './index.module.css'
 import Modal from '@/app/components/base/modal'
@@ -144,7 +143,7 @@ export default function AccountPage() {
           <Button className='font-medium !text-gray-700 !px-3 !py-[7px] !text-[13px]' onClick={() => setEditPasswordModalVisible(true)}>{userProfile.is_password_set ? t('common.account.resetPassword') : t('common.account.setPassword')}</Button>
         </div>
       )}
-      {!!apps.length && (
+      {/* {!!apps.length && (
         <>
           <div className='mb-6 border-[0.5px] border-gray-100' />
           <div className='mb-8'>
@@ -158,7 +157,7 @@ export default function AccountPage() {
             />
           </div>
         </>
-      )}
+      )} */}
       {editNameModalVisible && (
         <Modal
           isShow

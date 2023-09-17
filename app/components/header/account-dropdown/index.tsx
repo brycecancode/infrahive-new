@@ -7,12 +7,11 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 import AccountSetting from '../account-setting'
-import AccountAbout from '../account-about'
 import WorkplaceSelector from './workplace-selector'
 import I18n from '@/context/i18n'
 import Avatar from '@/app/components/base/avatar'
 import { useAppContext } from '@/context/app-context'
-import { ArrowUpRight, ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
+import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
 
 export default function AppSelector() {
@@ -94,16 +93,12 @@ export default function AppSelector() {
                         className={classNames(itemClassName, 'group justify-between')}
                         target='_blank'>
                         <div>{t('common.userProfile.helpCenter')}</div>
-                        <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
+                        {/* <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' /> */}
                       </Link>
                     </Menu.Item>
                     <Menu.Item>
                       <div className={classNames(itemClassName, 'justify-between')} >
                         <div>{t('common.userProfile.about')}</div>
-                        <div className='flex items-center'>
-                          <div className='mr-2 text-xs font-normal text-gray-500'>{langeniusVersionInfo.current_version}</div>
-
-                        </div>
                       </div>
                     </Menu.Item>
                   </div>
@@ -127,7 +122,7 @@ export default function AppSelector() {
         settingVisible && <AccountSetting onCancel={() => setSettingVisible(false)} />
       }
       {
-        aboutVisible && <AccountAbout onCancel={() => setAboutVisible(false)} langeniusVersionInfo={langeniusVersionInfo} />
+        // aboutVisible && <AccountAbout onCancel={() => setAboutVisible(false)} langeniusVersionInfo={langeniusVersionInfo} />
       }
     </div >
   )

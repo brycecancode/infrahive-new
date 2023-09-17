@@ -43,7 +43,7 @@ const LikedItem: FC<{ type?: 'plugin' | 'app'; appStatus?: boolean; detail: Rela
   detail,
 }) => {
   return (
-    <Link className={s.itemWrapper} href={`/app/${detail?.id}/overview`}>
+    <Link className={s.itemWrapper} href={`/app/${detail?.id}/configuration`}>
       <div className={s.iconWrapper}>
         <AppIcon size='tiny' />
         {type === 'app' && (

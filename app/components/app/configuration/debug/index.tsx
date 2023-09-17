@@ -11,7 +11,7 @@ import HasNotSetAPIKEY from '../base/warning-mask/has-not-set-api'
 import FormattingChanged from '../base/warning-mask/formatting-changed'
 import GroupName from '../base/group-name'
 import { AppType } from '@/types/app'
-import PromptValuePanel, { replaceStringWithValues } from '@/app/components/app/configuration/prompt-value-panel'
+import { replaceStringWithValues } from '@/app/components/app/configuration/prompt-value-panel'
 import type { IChatItem } from '@/app/components/app/chat'
 import Chat from '@/app/components/app/chat'
 import ConfigContext from '@/context/debug-configuration'
@@ -362,12 +362,12 @@ const Debug: FC<IDebug> = ({
             </Button>
           )}
         </div>
-        <PromptValuePanel
+        {/* <PromptValuePanel
           appType={mode as AppType}
           value={completionQuery}
           onChange={setCompletionQuery}
           onSend={sendTextCompletion}
-        />
+        /> */}
       </div>
       <div className="flex flex-col grow">
         {/* Chat */}

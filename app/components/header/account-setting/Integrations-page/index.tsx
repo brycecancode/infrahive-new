@@ -2,9 +2,9 @@
 
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import s from './index.module.css'
 import useSWR from 'swr'
 import Link from 'next/link'
+import s from './index.module.css'
 import { fetchAccountIntegrates } from '@/service/common'
 
 const titleClassName = `
@@ -26,12 +26,12 @@ export default function IntegrationsPage() {
   }
 
   const { data } = useSWR({ url: '/account/integrates' }, fetchAccountIntegrates)
-  const integrates = data?.data?.length ? data.data : []
+  const integrates = data?.data?.length ? data.data.slice(1, 2) : []
 
   return (
     <>
       <div className='mb-8'>
-        <div className={titleClassName}>{t('common.integrations.connected')}</div>
+        {/* <div className={titleClassName}>{t('common.integrations.connected')}</div> */}
         {
           integrates.map(integrate => (
             <div key={integrate.provider} className='mb-2 flex items-center px-3 py-2 bg-gray-50 border-[0.5px] border-gray-200 rounded-lg'>
@@ -42,7 +42,7 @@ export default function IntegrationsPage() {
               </div>
               {
                 !integrate.is_bound && (
-                  <Link 
+                  <Link
                     className='flex items-center h-8 px-[7px] bg-white rounded-lg border border-gray-200 text-xs font-medium text-gray-700 cursor-pointer'
                     href={integrate.link}
                     target={'_blank'}>

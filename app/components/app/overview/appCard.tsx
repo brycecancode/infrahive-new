@@ -7,7 +7,6 @@ import {
   RocketLaunchIcon,
   ShareIcon,
 } from '@heroicons/react/24/outline'
-import { SparklesIcon } from '@heroicons/react/24/solid'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import SettingsModal from './settings'
@@ -110,10 +109,10 @@ function AppCard({
 
   return (
     <div
-      className={`flex flex-col w-full shadow-sm border-[0.5px] rounded-lg border-gray-200 ${className ?? ''}`}
+      className={`flex flex-col w-full shadow-sm border-[0.5px] rounded-lg border-gray-200 ${className ?? ''} ${customBgColor ?? bgColor}`}
     >
       <div className={`px-6 py-4 ${customBgColor ?? bgColor} rounded-lg`}>
-        <div className="mb-2.5 flex flex-row items-start justify-between">
+        <div className=" flex flex-row items-start justify-between">
           <AppBasic
             iconType={cardType}
             icon={appInfo.icon}
@@ -143,8 +142,7 @@ function AppCard({
           </div>
         </div>
         <div
-          className={`pt-2 flex flex-row items-center ${!isApp ? 'mb-[calc(2rem_+_1px)]' : ''
-          }`}
+          className={`pt-2 flex flex-row items-center ${!isApp ? 'mb-[calc(2rem_+_1px)]' : ''}`}
         >
           {OPERATIONS_MAP[cardType].map((op) => {
             return (
@@ -175,7 +173,7 @@ function AppCard({
           })}
         </div>
       </div>
-      {isApp
+      {/* {isApp
         ? (
           <div
             className={
@@ -191,10 +189,10 @@ function AppCard({
             </div>
           </div>
         )
-        : null}
+        : null} */}
       {isApp
         ? (
-          <div>
+          <>
             <ShareLink
               isShow={showShareModal}
               onClose={() => setShowShareModal(false)}
@@ -220,7 +218,7 @@ function AppCard({
               appId={appInfo.id}
               mode={appInfo.mode}
             />
-          </div>
+          </>
         )
         : null}
     </div>

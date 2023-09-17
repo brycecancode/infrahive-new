@@ -112,6 +112,7 @@ const BlockInput: FC<IBlockInputProps> = ({
   }
 
   const placeholder = ''
+
   const editAreaClassName = 'focus:outline-none bg-transparent text-sm'
 
   const textAreaContent = (
@@ -169,7 +170,7 @@ const BlockInput: FC<IBlockInputProps> = ({
             )
             : (
               <p className="leading-5 text-xs text-gray-500">
-                {t('appDebug.promptTip')}
+                {/* {t('appDebug.promptTip')} */}
               </p>
             )}
         </div>

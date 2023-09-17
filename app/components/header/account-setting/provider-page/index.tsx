@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import useSWR from 'swr'
-import { LockClosedIcon } from '@heroicons/react/24/solid'
 import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
 import ProviderItem from './provider-item'
 import OpenaiHostedProvider from './openai-hosted-provider'
 import AnthropicHostedProvider from './anthropic-hosted-provider'
@@ -15,10 +13,10 @@ const providersMap: { [k: string]: any } = {
     icon: 'openai',
     name: 'OpenAI',
   },
-  'azure_openai-custom': {
-    icon: 'azure',
-    name: 'Azure OpenAI Service',
-  },
+  // 'azure_openai-custom': {
+  //   icon: 'azure',
+  //   name: 'Azure OpenAI Service',
+  // },
   'anthropic-custom': {
     icon: 'anthropic',
     name: 'Anthropic',
@@ -111,18 +109,7 @@ const ProviderPage = () => {
           ))
         }
       </div>
-      <div className='fixed bottom-0 w-[472px] h-[42px] flex items-center bg-white text-xs text-gray-500'>
-        <LockClosedIcon className='w-3 h-3 mr-1' />
-        {t('common.provider.encrypted.front')}
-        <Link
-          className='text-primary-600 mx-1'
-          target={'_blank'}
-          href='https://pycryptodome.readthedocs.io/en/latest/src/cipher/oaep.html'
-        >
-          PKCS1_OAEP
-        </Link>
-        {t('common.provider.encrypted.back')}
-      </div>
+
     </div>
   )
 }

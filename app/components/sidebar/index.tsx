@@ -170,7 +170,7 @@ const SideBar = (props: SidebarProps) => {
           </div>
 
           <div className='flex flex-col'>
-            Test
+
           </div>
 
         </Box>
