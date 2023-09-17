@@ -155,7 +155,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     return <Loading />
 
   return (
-    <div className='flex' style={{ height: 'calc(100vh - 56px)' }}>
+    <div className='flex flex-col ' style={{ height: 'calc(100vh - 56px)' }} >
       {!hideSideBar && <AppSideBar
         title={datasetRes?.name || '--'}
         icon={datasetRes?.icon || 'https://static.infrahive.ai/images/dataset-default-icon.png'}
@@ -170,7 +170,7 @@ const DatasetDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
         dataset: datasetRes,
         mutateDatasetRes: () => mutateDatasetRes(),
       }}>
-        <div className="bg-white grow">{children}</div>
+        <div className="bg-white grow h-full">{children}</div>
       </DatasetDetailContext.Provider>
     </div>
   )

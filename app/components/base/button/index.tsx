@@ -22,7 +22,7 @@ const Button: FC<IButtonProps> = ({
   let style = 'cursor-pointer'
   switch (type) {
     case 'primary':
-      style = (disabled || loading) ? 'bg-primary-200 cursor-not-allowed text-white' : 'bg-amber-400 hover:bg-amber-400/75 hover:shadow-md cursor-pointer text-white hover:shadow-sm'
+      style = (disabled || loading) ? 'bg-amber-200 cursor-not-allowed text-white' : 'bg-amber-400 hover:bg-amber-400/75 hover:shadow-md cursor-pointer text-white hover:shadow-sm'
       break
     case 'warning':
       style = (disabled || loading) ? 'bg-red-600/75 cursor-not-allowed text-white' : 'bg-red-600 hover:bg-red-600/75 hover:shadow-md cursor-pointer text-white hover:shadow-sm'

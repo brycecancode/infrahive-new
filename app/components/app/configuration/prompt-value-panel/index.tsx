@@ -6,7 +6,6 @@ import { useContext } from 'use-context-selector'
 import {
   PlayIcon,
 } from '@heroicons/react/24/solid'
-import VarIcon from '../base/icons/var-icon'
 import ConfigContext from '@/context/debug-configuration'
 import type { PromptVariable } from '@/models/debug'
 import { AppType } from '@/types/app'
@@ -69,8 +68,8 @@ const PromptValuePanel: FC<IPromptValuePanelProps> = ({
     <div className='py-3 rounded-t-xl bg-indigo-25'>
       <div className="px-4">
         <div className="flex items-center space-x-1 cursor-pointer" onClick={() => setPromptPreviewCollapse(!promptPreviewCollapse)}>
-          {starIcon}
-          <div className="text-xs font-medium text-indigo-600 uppercase">{t('appDebug.inputs.previewTitle')}</div>
+          {/* {starIcon} */}
+          <div className="text-xs font-medium text-amber-600 uppercase">{t('appDebug.inputs.previewTitle')}</div>
           {
             promptPreviewCollapse
               ? <ChevronRight className='w-3 h-3 text-gray-700' />
@@ -113,7 +112,7 @@ const PromptValuePanel: FC<IPromptValuePanelProps> = ({
           `${!userInputFieldCollapse && 'mb-2'}`
         }>
           <div className='flex items-center space-x-1 cursor-pointer' onClick={() => setUserInputFieldCollapse(!userInputFieldCollapse)}>
-            <div className='flex items-center justify-center w-4 h-4'><VarIcon /></div>
+            {/* <div className='flex items-center justify-center w-4 h-4'><VarIcon /></div> */}
             <div className='text-xs font-medium text-gray-800'>{t('appDebug.inputs.userInputField')}</div>
             {
               userInputFieldCollapse

@@ -1,6 +1,7 @@
 import React from 'react'
 import WelcomeBanner, { EditKeyPopover } from './welcome-banner'
 import CardView from './cardView'
+import ChartView from './chartView'
 import { getLocaleOnServer } from '@/i18n/server'
 import { useTranslation } from '@/i18n/i18next-serverside-config'
 
@@ -14,14 +15,14 @@ const Overview = async ({
   const locale = getLocaleOnServer()
   const { t } = await useTranslation(locale, 'app-overview')
   return (
-    <div className="h-full px-16 py-6 overflow-scroll">
+    <div className="h-full px-16 py-6 overflow-auto">
       <WelcomeBanner />
       <div className='flex flex-row items-center justify-between mb-4 text-xl text-gray-900'>
         {t('overview.title')}
         <EditKeyPopover />
       </div>
       <CardView appId={appId} />
-      {/* <ChartView appId={appId} /> */}
+      <ChartView appId={appId} />
     </div>
   )
 }

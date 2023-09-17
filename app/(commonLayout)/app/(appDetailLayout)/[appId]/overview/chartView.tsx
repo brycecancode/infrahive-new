@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
 import { fetchAppDetail } from '@/service/apps'
 import type { PeriodParams } from '@/app/components/app/overview/appChart'
-import { AvgResponseTime, AvgSessionInteractions, ConversationsChart, CostChart, EndUsersChart, TokenPerSecond, UserSatisfactionRate } from '@/app/components/app/overview/appChart'
+import { AvgResponseTime, AvgSessionInteractions, ConversationsChart, CostChart, EndUsersChart, UserSatisfactionRate } from '@/app/components/app/overview/appChart'
 import type { Item } from '@/app/components/base/select'
 import { SimpleSelect } from '@/app/components/base/select'
 import { TIME_PERIOD_LIST } from '@/app/components/app/log/filter'
@@ -36,7 +36,7 @@ export default function ChartView({ appId }: IChartViewProps) {
     return null
 
   return (
-    <div>
+    <div className='overflow-auto'>
       <div className='flex flex-row items-center mt-8 mb-4 text-gray-900 text-base'>
         <span className='mr-3'>{t('appOverview.analysis.title')}</span>
         <SimpleSelect
@@ -47,15 +47,13 @@ export default function ChartView({ appId }: IChartViewProps) {
         />
       </div>
       <div className='flex flex-row w-full mb-6'>
-        <div className='flex-1 mr-3'>
-          <ConversationsChart period={period} id={appId} />
-        </div>
-        <div className='flex-1 ml-3'>
+        <div className='flex-1 mr-3 ml-1'>
           <EndUsersChart period={period} id={appId} />
         </div>
-      </div>
-      <div className='flex flex-row w-full mb-6'>
-        <div className='flex-1 mr-3'>
+        <div className='flex-1 ml-3'>
+          <ConversationsChart period={period} id={appId} />
+        </div>
+        <div className='flex-1 ml-3 mr-1'>
           {isChatApp
             ? (
               <AvgSessionInteractions period={period} id={appId} />
@@ -64,14 +62,16 @@ export default function ChartView({ appId }: IChartViewProps) {
               <AvgResponseTime period={period} id={appId} />
             )}
         </div>
-        <div className='flex-1 ml-3'>
-          <TokenPerSecond period={period} id={appId} />
-        </div>
+
       </div>
       <div className='flex flex-row w-full mb-6'>
+
         <div className='flex-1 ml-3'>
           <UserSatisfactionRate period={period} id={appId} />
         </div>
+      </div>
+      <div className='flex flex-row w-full mb-6'>
+
         <div className='flex-1 ml-3'>
           <CostChart period={period} id={appId} />
         </div>

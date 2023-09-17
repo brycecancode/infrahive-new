@@ -7,6 +7,10 @@ import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { get } from 'lodash-es'
 import { useTranslation } from 'react-i18next'
+import PersonIcon from '@mui/icons-material/Person'
+import WifiChannelIcon from '@mui/icons-material/WifiChannel'
+import EmailIcon from '@mui/icons-material/Email'
+import NumberChart from './NumberChart'
 import { formatNumber } from '@/utils/format'
 import Basic from '@/app/components/app-sidebar/basic'
 import Loading from '@/app/components/base/loading'
@@ -210,8 +214,8 @@ const Chart: React.FC<IChartProps> = ({
             return `<div style='color:#6B7280;font-size:12px'>${params.name}</div>
                           <div style='font-size:14px;color:#1F2A37'>${valueFormatter((params.data as any)[yField])}
                               ${!CHART_TYPE_CONFIG[chartType].showTokens
-    ? ''
-    : `<span style='font-size:12px'>
+                ? ''
+                : `<span style='font-size:12px'>
                                   <span style='margin-left:4px;color:#6B7280'>(</span>
                                   <span style='color:#FF8A4C'>~$${get(params.data, 'total_price', 0)}</span>
                                   <span style='color:#6B7280'>)</span>
@@ -261,6 +265,14 @@ export const ConversationsChart: FC<IBizChartProps> = ({ id, period }) => {
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
+  return <NumberChart title="Total Messages"
+    numbers={(response.data.reduce((acu, session) => {
+      return acu + session.conversation_count
+    }, 0)).toString()}
+    color1="#D8E3F766"
+    color2="#9FC4FF"
+    increase="5"
+    icon={<EmailIcon />} />
   return <Chart
     basicInfo={{ title: t('appOverview.analysis.totalMessages.title'), explanation: t('appOverview.analysis.totalMessages.explanation'), timePeriod: period.name }}
     chartData={!noDataFlag ? response : { data: getDefaultChartData(period.query ?? defaultPeriod) }}
@@ -276,6 +288,14 @@ export const EndUsersChart: FC<IBizChartProps> = ({ id, period }) => {
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
+  return <NumberChart title="Active Users"
+    numbers={(response.data.reduce((acu, session) => {
+      return acu + session.terminal_count
+    }, 0)).toString()}
+    color1="#EC545333"
+    color2="#EC5453"
+    increase="5"
+    icon={<PersonIcon />} />
   return <Chart
     basicInfo={{ title: t('appOverview.analysis.activeUsers.title'), explanation: t('appOverview.analysis.activeUsers.explanation'), timePeriod: period.name }}
     chartData={!noDataFlag ? response : { data: getDefaultChartData(period.query ?? defaultPeriod) }}
@@ -290,6 +310,14 @@ export const AvgSessionInteractions: FC<IBizChartProps> = ({ id, period }) => {
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
+  return <NumberChart title="Average Session Interactions"
+    numbers={((response.data.reduce((acu, session) => {
+      return acu + session.interactions
+    }, 0)) / response.data.length).toFixed(2).toString()}
+    color1="#FEC20033"
+    color2="#FFD650"
+    increase="5"
+    icon={<WifiChannelIcon />} />
   return <Chart
     basicInfo={{ title: t('appOverview.analysis.avgSessionInteractions.title'), explanation: t('appOverview.analysis.avgSessionInteractions.explanation'), timePeriod: period.name }}
     chartData={!noDataFlag ? response : { data: getDefaultChartData({ ...(period.query ?? defaultPeriod), key: 'interactions' }) } as any}
@@ -306,6 +334,15 @@ export const AvgResponseTime: FC<IBizChartProps> = ({ id, period }) => {
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
+  return <NumberChart title="Average Response"
+    numbers={`${(response.data.reduce((acu, session) => {
+      return acu + session.latency
+    }, 0) / response.data.length).toFixed(2)
+      } ms`}
+    color1="#FEC20033"
+    color2="#FFD650"
+    increase="5"
+    icon={<WifiChannelIcon />} />
   return <Chart
     basicInfo={{ title: t('appOverview.analysis.avgResponseTime.title'), explanation: t('appOverview.analysis.avgResponseTime.explanation'), timePeriod: period.name }}
     chartData={!noDataFlag ? response : { data: getDefaultChartData({ ...(period.query ?? defaultPeriod), key: 'latency' }) } as any}
@@ -319,7 +356,7 @@ export const AvgResponseTime: FC<IBizChartProps> = ({ id, period }) => {
 
 export const TokenPerSecond: FC<IBizChartProps> = ({ id, period }) => {
   const { t } = useTranslation()
-  const { data: response } = useSWR({ url: `/apps/${id}/statistics/tokens-per-second`, params: period.query }, getAppStatistics)
+  const { data: response } = useSWR({ url: `/ apps / ${id} /statistics/tokens - per - second`, params: period.query }, getAppStatistics)
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
@@ -336,7 +373,7 @@ export const TokenPerSecond: FC<IBizChartProps> = ({ id, period }) => {
 
 export const UserSatisfactionRate: FC<IBizChartProps> = ({ id, period }) => {
   const { t } = useTranslation()
-  const { data: response } = useSWR({ url: `/apps/${id}/statistics/user-satisfaction-rate`, params: period.query }, getAppStatistics)
+  const { data: response } = useSWR({ url: `/ apps / ${id} /statistics/user - satisfaction - rate`, params: period.query }, getAppStatistics)
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
@@ -353,7 +390,7 @@ export const UserSatisfactionRate: FC<IBizChartProps> = ({ id, period }) => {
 export const CostChart: FC<IBizChartProps> = ({ id, period }) => {
   const { t } = useTranslation()
 
-  const { data: response } = useSWR({ url: `/apps/${id}/statistics/token-costs`, params: period.query }, getAppTokenCosts)
+  const { data: response } = useSWR({ url: `/ apps / ${id} /statistics/token - costs`, params: period.query }, getAppTokenCosts)
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0

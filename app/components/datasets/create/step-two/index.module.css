@@ -71,7 +71,7 @@
 }
 
 .indexItem .warningTip .click {
-  color: #155EEF;
+  color: #fed44d;
   cursor: pointer;
 }
 
@@ -162,17 +162,17 @@
 
 .radioItem:hover {
   background-color: #ffffff;
-  border-color: #B2CCFF;
+  border-color: #fee799;
   box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
 }
 
 .radioItem:hover .radio {
-  border-color: #155eef;
+  border-color: #fed44d;
 }
 
 .radioItem.active {
   border-width: 1.5px;
-  border-color: #528BFF;
+  border-color: #fed44d;
   box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
 
@@ -180,12 +180,12 @@
   top: 25.5px;
   right: 19.5px;
   border-width: 5px;
-  border-color: #155EEF;
+  border-color: #fed44d;
 }
 
 .radioItem.active:hover {
   border-width: 1.5px;
-  border-color: #528BFF;
+  border-color: #fed44d;
   box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
 
@@ -262,6 +262,7 @@
   font-size: 13px;
   line-height: 18px;
 }
+
 .input {
   @apply inline-flex h-9 w-full py-1 px-2 rounded-lg text-xs leading-normal;
   @apply bg-gray-100 caret-primary-600 hover:bg-gray-100 focus:ring-1 focus:ring-inset focus:ring-gray-200 focus-visible:outline-none focus:bg-white placeholder:text-gray-400;
@@ -312,9 +313,11 @@
 .fileIcon.json {
   background-image: url(../assets/json.svg);
 }
+
 .sourceContent {
   flex: 1 1 auto;
 }
+
 .sourceCount {
   @apply shrink-0 ml-1;
   font-weight: 500;
@@ -322,6 +325,7 @@
   line-height: 18px;
   color: #667085;
 }
+
 .segmentCount {
   flex: 1 1 30%;
   max-width: 120px;
@@ -406,12 +410,14 @@
   backdrop-filter: blur(4px);
   animation: fix 0.5s;
 }
+
 @keyframes fix {
   from {
     padding-top: 42px;
     font-size: 18px;
     line-height: 28px;
   }
+
   to {
     padding-top: 12px;
     font-size: 12px;

@@ -72,10 +72,12 @@ const CardView: FC<ICardViewProps> = ({ appId }) => {
         className='mr-3 flex-1'
         appInfo={response}
         cardType='webapp'
+        customBgColor='bg-pink-500 bg-opacity-10'
         onChangeStatus={onChangeSiteStatus}
         onGenerateCode={onGenerateCode}
         onSaveSiteConfig={onSaveSiteConfig} />
       <AppCard
+        customBgColor='bg-blue-500 bg-opacity-40'
         className='ml-3 flex-1'
         cardType='api'
         appInfo={response}

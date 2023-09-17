@@ -11,7 +11,7 @@ import HasNotSetAPIKEY from '../base/warning-mask/has-not-set-api'
 import FormattingChanged from '../base/warning-mask/formatting-changed'
 import GroupName from '../base/group-name'
 import { AppType } from '@/types/app'
-import { replaceStringWithValues } from '@/app/components/app/configuration/prompt-value-panel'
+import PromptValuePanel, { replaceStringWithValues } from '@/app/components/app/configuration/prompt-value-panel'
 import type { IChatItem } from '@/app/components/app/chat'
 import Chat from '@/app/components/app/chat'
 import ConfigContext from '@/context/debug-configuration'
@@ -362,19 +362,19 @@ const Debug: FC<IDebug> = ({
             </Button>
           )}
         </div>
-        {/* <PromptValuePanel
+        <PromptValuePanel
           appType={mode as AppType}
           value={completionQuery}
           onChange={setCompletionQuery}
           onSend={sendTextCompletion}
-        /> */}
+        />
       </div>
       <div className="flex flex-col grow">
         {/* Chat */}
         {mode === AppType.chat && (
           <div className="mt-[34px] h-full flex flex-col">
-            <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative mt-1.5 grow h-[200px] overflow-hidden')}>
-              <div className="h-full overflow-y-auto overflow-x-hidden" ref={chatListDomRef}>
+            <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative mt-1.5 grow h-[220px] overflow-auto')}>
+              <div className="h-full overflow-auto" ref={chatListDomRef}>
                 <Chat
                   chatList={chatList}
                   onSend={onSend}
