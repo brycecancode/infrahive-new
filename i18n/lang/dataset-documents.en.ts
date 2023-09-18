@@ -1,7 +1,7 @@
 const translation = {
   list: {
     title: 'Documents',
-    desc: 'All files of the dataset are shown here, and the entire dataset can be linked to InfraHive citations or indexed via the Chat plugin.',
+    desc: '',
     addFile: 'add file',
     addPages: 'Add Pages',
     table: {

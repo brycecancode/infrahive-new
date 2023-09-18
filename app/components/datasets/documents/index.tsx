@@ -55,15 +55,10 @@ const EmptyElement: FC<{ onClick: () => void; type?: 'upload' | 'sync' }> = ({ o
   const { t } = useTranslation()
   return <div className={s.emptyWrapper}>
     <div className={s.emptyElement}>
-      <div className={s.emptySymbolIconWrapper}>
-        {type === 'upload' ? <FolderPlusIcon /> : <NotionIcon />}
-      </div>
-      <span className={s.emptyTitle}>{t('datasetDocuments.list.empty.title')}<ThreeDotsIcon className='inline relative -top-3 -left-1.5' /></span>
-      <div className={s.emptyTip}>
-        {t(`datasetDocuments.list.empty.${type}.tip`)}
-      </div>
+
+      <span className={s.emptyTitle}>No Documents found.</span>
       {type === 'upload' && <Button onClick={onClick} className={s.addFileBtn}>
-        <PlusIcon className={s.plusIcon} />{t('datasetDocuments.list.addFile')}
+        <PlusIcon className={s.plusIcon} />Add File
       </Button>}
     </div>
   </div>
