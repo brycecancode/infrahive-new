@@ -95,7 +95,8 @@ const NormalForm = () => {
         body: {
           email,
           password,
-          name: firstName + lastName,
+          fname: firstName,
+          lname: lastName,
           remember_me: true,
         },
       })
@@ -229,7 +230,7 @@ const NormalForm = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
                   >
-                    {showPassword ? <VisibilityIcon/> : <VisibilityOffIcon/>}
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </button>
                 </div>
               </div>
@@ -293,7 +294,7 @@ const NormalForm = () => {
             </div>
           </div>
           <div className="w-hull text-center block mt-2 text-xs text-gray-600">
-        Already have an account ?
+            Already have an account ?
             <Link
               className='text-primary-600'
               target={'_blank'}
