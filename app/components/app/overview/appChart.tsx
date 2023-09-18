@@ -373,7 +373,7 @@ export const TokenPerSecond: FC<IBizChartProps> = ({ id, period }) => {
 
 export const UserSatisfactionRate: FC<IBizChartProps> = ({ id, period }) => {
   const { t } = useTranslation()
-  const { data: response } = useSWR({ url: `/ apps / ${id} /statistics/user - satisfaction - rate`, params: period.query }, getAppStatistics)
+  const { data: response } = useSWR({ url: `/apps/${id}/statistics/user-satisfaction-rate`, params: period.query }, getAppStatistics)
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
@@ -390,7 +390,7 @@ export const UserSatisfactionRate: FC<IBizChartProps> = ({ id, period }) => {
 export const CostChart: FC<IBizChartProps> = ({ id, period }) => {
   const { t } = useTranslation()
 
-  const { data: response } = useSWR({ url: `/ apps / ${id} /statistics/token - costs`, params: period.query }, getAppTokenCosts)
+  const { data: response } = useSWR({ url: `/apps/${id}/statistics/token-costs`, params: period.query }, getAppTokenCosts)
   if (!response)
     return <Loading />
   const noDataFlag = !response.data || response.data.length === 0
