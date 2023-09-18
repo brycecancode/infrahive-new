@@ -3,12 +3,12 @@
 }
 
 .infrahiveIcon {
-  background-image: url(./icons/infrahive.svg);
+  /* background-image: url(./icons/infrahive.svg); */
 }
 
 .infrahiveHeader {
   width: 24px;
   height: 24px;
-  background: url(./icons/infrahive-header.svg) center center no-repeat;
+  /* background: url(./icons/infrahive-header.svg) center center no-repeat; */
   background-size: contain;
 }
