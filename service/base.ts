@@ -161,6 +161,7 @@ const baseFetch = (
   }: IOtherOptions,
 ) => {
   const options = Object.assign({}, baseOptions, fetchOptions)
+  options.headers.set('ngrok-skip-browser-warning', '69420')
   if (isPublicAPI) {
     const sharedToken = globalThis.location.pathname.split('/').slice(-1)[0]
     const accessToken
@@ -302,7 +303,9 @@ export const upload = (options: any): Promise<any> => {
   const defaultOptions = {
     method: 'POST',
     url: `${API_PREFIX}/files/upload`,
-    headers: {},
+    headers: {
+      'ngrok-skip-browser-warning': '69420',
+    },
     data: {},
   }
   options = {
