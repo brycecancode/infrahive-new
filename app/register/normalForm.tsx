@@ -297,7 +297,6 @@ const NormalForm = () => {
             Already have an account ?
             <Link
               className='text-primary-600'
-              target={'_blank'}
               href='/signin'
             >SignIn</Link>
 
