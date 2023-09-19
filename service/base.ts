@@ -16,7 +16,7 @@ const ContentType = {
 const baseOptions = {
   method: 'GET',
   mode: 'cors',
-  credentials: 'include', // always send cookies、HTTP Basic authentication.
+
   headers: new Headers({
     'Content-Type': ContentType.json,
   }),
