@@ -1,7 +1,7 @@
 const translation = {
   welcome: {
-    firstStepTip: 'To get started,',
-    enterKeyTip: 'enter your OpenAI API Key below',
+    firstStepTip: 'Before getting started,',
+    enterKeyTip: 'Please enter your OpenAI API Key ',
     getKeyTip: 'Get your API Key from OpenAI dashboard',
     placeholder: 'Your OpenAI API Key(eg.sk-xxxx)',
   },

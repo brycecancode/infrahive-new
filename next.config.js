@@ -30,13 +30,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/apps',
-        permanent: false,
-      },
-    ]
+    return []
   },
 }
 

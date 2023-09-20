@@ -96,11 +96,7 @@ export default function AppSelector() {
                         {/* <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' /> */}
                       </Link>
                     </Menu.Item>
-                    <Menu.Item>
-                      <div className={classNames(itemClassName, 'justify-between')} >
-                        <div>{t('common.userProfile.about')}</div>
-                      </div>
-                    </Menu.Item>
+
                   </div>
                   <Menu.Item>
                     <div className='p-1' onClick={() => handleLogout()}>

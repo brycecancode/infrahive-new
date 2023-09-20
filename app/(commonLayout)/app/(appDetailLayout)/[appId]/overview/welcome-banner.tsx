@@ -128,7 +128,7 @@ const EditKeyDiv: FC<IEditKeyDiv> = ({ className = '', showInPopover = false, on
   return (
     <div className={`flex flex-col w-full rounded-lg px-8 py-6 border-solid border-[0.5px] ${className} ${Object.values(STATUS_COLOR_MAP[editStatus]).join(' ')}`}>
       {!showInPopover && <p className='text-xl font-medium text-gray-800'>{t('appOverview.welcome.firstStepTip')}</p>}
-      <p className={`${showInPopover ? 'text-sm' : 'text-xl'} font-medium text-gray-800`}>{t('appOverview.welcome.enterKeyTip')} {showInPopover ? '' : '👇'}</p>
+      <p className={`${showInPopover ? 'text-sm' : 'text-xl'} font-medium text-gray-800`}>{t('appOverview.welcome.enterKeyTip')} </p>
       <div className='relative mt-2'>
         <input type="text"
           className={`h-9 w-96 max-w-full py-2 pl-2 text-gray-900 rounded-lg bg-white sm:text-xs focus:ring-blue-500 focus:border-blue-500 shadow-sm ${editStatus === 'normal' ? 'pr-2' : 'pr-8'}`}

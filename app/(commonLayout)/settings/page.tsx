@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
-import { AtSymbolIcon, CubeTransparentIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { CubeTransparentIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { UserIcon as UserIconSolid, UsersIcon as UsersIconSolid } from '@heroicons/react/24/solid'
 
 import { useSearchParams } from 'next/navigation'
@@ -41,12 +41,12 @@ export default function AccountSetting() {
           icon: <UserIcon className={iconClassName} />,
           activeIcon: <UserIconSolid className={iconClassName} />,
         },
-        {
-          key: 'integrations',
-          name: t('common.settings.integrations'),
-          icon: <AtSymbolIcon className={iconClassName} />,
-          activeIcon: <AtSymbolIcon className={iconClassName} />,
-        },
+        // {
+        //   key: 'integrations',
+        //   name: t('common.settings.integrations'),
+        //   icon: <AtSymbolIcon className={iconClassName} />,
+        //   activeIcon: <AtSymbolIcon className={iconClassName} />,
+        // },
         // {
         //   key: 'language',
         //   name: t('common.settings.language'),
