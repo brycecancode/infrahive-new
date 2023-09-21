@@ -1,9 +1,9 @@
 import React from 'react'
-import Spinner from '../components/base/spinner'
+import Loading from '../components/base/loading'
 
-const Loading = () => {
+const LoadingPage = () => {
   return (
-    <Spinner />
+    <Loading type='app' />
   )
 }
-export default Loading
+export default LoadingPage

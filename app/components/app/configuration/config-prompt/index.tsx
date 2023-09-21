@@ -40,10 +40,12 @@ const Prompt: FC<IPromptProps> = ({
   const [isShowConfirmAddVar, { setTrue: showConfirmAddVar, setFalse: hideConfirmAddVar }] = useBoolean(false)
 
   const handleChange = (newTemplates: string, keys: string[]) => {
-    // const hasRemovedKeysInput = promptVariables.filter(input => keys.includes(input.key))
+    console.log('handleChange', newTemplates, keys)
+    const previousKeys = promptVariables.filter(input => keys.includes(input.key))
     const newPromptVariables = keys.filter(key => !(key in promptVariablesObj)).map(key => getNewVar(key))
-    if (newPromptVariables.length > 0) {
-      setNewPromptVariables(newPromptVariables)
+
+    if (newPromptVariables.length > 0 || previousKeys.length > 0) {
+      setNewPromptVariables([...newPromptVariables, ...previousKeys])
       setNewTemplates(newTemplates)
       showConfirmAddVar()
       return

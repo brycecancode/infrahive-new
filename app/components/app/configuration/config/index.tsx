@@ -44,7 +44,7 @@ const Config: FC = () => {
   const handlePromptChange = (newTemplate: string, newVariables: PromptVariable[]) => {
     const newModelConfig = produce(modelConfig, (draft) => {
       draft.configs.prompt_template = newTemplate
-      draft.configs.prompt_variables = [...draft.configs.prompt_variables, ...newVariables]
+      draft.configs.prompt_variables = newVariables
     })
 
     if (modelConfig.configs.prompt_template !== newTemplate)
