@@ -1,8 +1,9 @@
 import React from 'react'
+import Loading from './components/base/loading'
 
-const Loading = () => {
+const LoadingPage = () => {
   return (
-    <div>loading</div>
+    <Loading type='app' />
   )
 }
-export default Loading
+export default LoadingPage
