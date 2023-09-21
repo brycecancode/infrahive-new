@@ -4,7 +4,6 @@ import React from 'react'
 import { useContext } from 'use-context-selector'
 import produce from 'immer'
 import { useBoolean } from 'ahooks'
-import { t } from 'i18next'
 import DatasetConfig from '../dataset-config'
 import ChatGroup from '../features/chat-group'
 import ExperienceEnchanceGroup from '../features/experience-enchance-group'
@@ -130,7 +129,7 @@ const Config: FC = () => {
             onFinished={handleAutomaticRes}
           />
         )}
-        <div className="h2 text-center">{mode === AppType.chat ? 'AI Chat Bot Settings' : t('appDebug.completionSubTitle')}</div>
+        <div className="h2 text-center">{'AI Chat Bot Settings'}</div>
 
         <ConfigPrompt
           mode={mode as AppType}

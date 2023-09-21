@@ -110,7 +110,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
         onClose()
       notify({ type: 'success', message: t('app.newApp.appCreated') })
       mutateApps()
-      router.push(`/app/${app.id}/overview`)
+      router.push(`/app/${app.id}/configuration`)
     }
     catch (e) {
       notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
