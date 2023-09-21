@@ -128,7 +128,7 @@ const EmbeddingProcess: FC<Props> = ({ datasetId, batchId, documents = [], index
 
   const router = useRouter()
   const navToDocumentList = () => {
-    router.push(`/datasets/${datasetId}/documents`)
+    router.push(`/datasets/${datasetId}/settings`)
   }
 
   const isEmbedding = useMemo(() => {
