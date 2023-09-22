@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import cn from 'classnames'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
@@ -8,7 +7,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useContext } from 'use-context-selector'
 import { UserPlusIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
-import s from './index.module.css'
 import InviteModal from './invite-modal'
 import InvitedModal from './invited-modal'
 import Operation from './operation'
@@ -17,7 +15,6 @@ import I18n from '@/context/i18n'
 import { useAppContext } from '@/context/app-context'
 import Avatar from '@/app/components/base/avatar'
 import { useWorkspacesContext } from '@/context/workspace-context'
-import CommingSoon from '@/app/components/comming-soon'
 
 dayjs.extend(relativeTime)
 const MembersPage = () => {
@@ -38,18 +35,13 @@ const MembersPage = () => {
   const { workspaces } = useWorkspacesContext()
   const currentWrokspace = workspaces.filter(item => item.current)?.[0]
 
-  return <CommingSoon />
-
   return (
     <>
       <div>
-        <div className='flex items-center mb-4 p-3 bg-gray-50 rounded-2xl'>
-          <div className={cn(s['logo-icon'], 'shrink-0')}></div>
-          <div className='grow mx-2'>
-            <div className='text-sm font-medium text-gray-900'>{currentWrokspace?.name}</div>
-            <div className='text-xs text-gray-500'>{t('common.userProfile.workspace')}</div>
-          </div>
+        <div className='flex flex-row-reverse w-full mb-4'>
+
           <div className='
+
             shrink-0 flex items-center py-[7px] px-3 border-[0.5px] border-gray-200
             text-[13px] font-medium text-primary-600 bg-white
             shadow-[0_1px_2px_rgba(16,24,40,0.05)] rounded-lg cursor-pointer
