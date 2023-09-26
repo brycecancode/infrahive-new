@@ -5,7 +5,6 @@ import { useContext } from 'use-context-selector'
 import produce from 'immer'
 import { useBoolean } from 'ahooks'
 import DatasetConfig from '../dataset-config'
-import ChatGroup from '../features/chat-group'
 import ExperienceEnchanceGroup from '../features/experience-enchance-group'
 import Toolbox from '../toolbox'
 import type { AutomaticRes } from './automatic/get-automatic-res'
@@ -105,7 +104,7 @@ const Config: FC = () => {
   }
   return (
     <>
-      <div className="pb-[20px]">
+      <div className="pb-[20px] bg-gray-50">
         {/* <div className='flex justify-between items-center mb-4'>
           <AddFeatureBtn onClick={showChooseFeatureTrue} />
           <AutomaticBtn onClick={showAutomaticTrue}/>
@@ -137,7 +136,7 @@ const Config: FC = () => {
           promptVariables={promptVariables}
           onChange={handlePromptChange}
         />
-
+        <DatasetConfig />
         {/* Variables */}
         <ConfigVar
           promptVariables={promptVariables}
@@ -145,10 +144,9 @@ const Config: FC = () => {
         />
 
         {/* Dataset */}
-        <DatasetConfig />
 
         {/* ChatConifig */}
-        {
+        {/* {
           hasChatConfig && (
             <ChatGroup
               isShowOpeningStatement={featureConfig.openingStatement}
@@ -162,7 +160,7 @@ const Config: FC = () => {
               isShowSpeechText={featureConfig.speechToText && currentProvider?.provider_name === 'openai'}
             />
           )
-        }
+        } */}
 
         {/* TextnGeneration config */}
         {moreLikeThisConfig.enabled && (

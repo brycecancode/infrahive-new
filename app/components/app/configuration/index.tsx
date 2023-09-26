@@ -277,7 +277,7 @@ const Configuration: FC = () => {
     }}
     >
       <>
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full bg-gray-50">
           <div className='flex items-center justify-between px-6 border-b shrink-0 h-14 ' >
             <div className='text-xl text-gray-900'></div>
             <div className='flex items-center'>
@@ -301,7 +301,7 @@ const Configuration: FC = () => {
               <Button type='primary' onClick={saveAppConfig} className='shrink-0 w-[70px] !h-8 !text-[13px] font-medium'>{t('appDebug.operation.applyConfig')}</Button>
             </div>
           </div>
-          <div className='flex grow h-[200px]'>
+          <div className='flex grow h-[200px] bg-gray-50 '>
             <div className="w-[574px] shrink-0 h-full overflow-y-auto border-r py-4 px-6">
               <Config />
             </div>
