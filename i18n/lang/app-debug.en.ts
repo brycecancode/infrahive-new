@@ -134,14 +134,14 @@ const translation = {
     addOption: 'Add option',
   },
   openingStatement: {
-    title: 'Opening remarks',
+    title: 'Opening message',
     add: 'Add',
     writeOpner: 'Write remarks',
-    placeholder: 'Write your remarks message here',
+    placeholder: 'Write your opening message here',
     noDataPlaceHolder:
       'Starting the conversation with the user can help AI establish a closer connection with them in conversational applications.',
     varTip: 'You can use variables, try type {{variable}}',
-    tooShort: 'At least 20 words of initial prompt are required to generate an opening remarks for the conversation.',
+    tooShort: 'At least 20 words of initial prompt are required to generate an opening message for the conversation.',
     notIncludeKey: 'The initial prompt does not include the variable: {{key}}. Please add it to the initial prompt.',
   },
   modelConfig: {
