@@ -9,8 +9,9 @@ import ExperienceEnchanceGroup from '../features/experience-enchance-group'
 import Toolbox from '../toolbox'
 import type { AutomaticRes } from './automatic/get-automatic-res'
 import GetAutomaticResModal from './automatic/get-automatic-res'
-import ChooseFeature from './feature/choose-feature'
 import useFeature from './feature/use-feature'
+import ChooseFeature from './feature/choose-feature'
+import AutomaticBtn from './automatic/automatic-btn'
 import ConfigContext from '@/context/debug-configuration'
 import ConfigPrompt from '@/app/components/app/configuration/config-prompt'
 import ConfigVar from '@/app/components/app/configuration/config-var'
@@ -105,21 +106,11 @@ const Config: FC = () => {
   return (
     <>
       <div className="pb-[20px] bg-gray-50">
-        {/* <div className='flex justify-between items-center mb-4'>
-          <AddFeatureBtn onClick={showChooseFeatureTrue} />
-          <AutomaticBtn onClick={showAutomaticTrue}/>
-        </div> */}
+        <div className='flex justify-between items-center mb-4'>
 
-        {showChooseFeature && (
-          <ChooseFeature
-            isShow={showChooseFeature}
-            onClose={showChooseFeatureFalse}
-            isChatApp={isChatApp}
-            config={featureConfig}
-            onChange={handleFeatureChange}
-            showSpeechToTextItem={currentProvider?.provider_name === 'openai'}
-          />
-        )}
+          <AutomaticBtn onClick={showAutomaticTrue} />
+        </div>
+
         {showAutomatic && (
           <GetAutomaticResModal
             mode={mode as AppType}
@@ -136,6 +127,26 @@ const Config: FC = () => {
           promptVariables={promptVariables}
           onChange={handlePromptChange}
         />
+        <ChooseFeature
+          isChatApp={isChatApp}
+          config={featureConfig}
+          onChange={handleFeatureChange}
+          openingStatementConfig={
+            featureConfig.openingStatement
+              ? {
+                value: introduction,
+                onChange: setIntroduction,
+              }
+              : undefined
+          }
+          showSpeechToTextItem={currentProvider?.provider_name === 'openai'}
+        />
+        {/* <ChatGroup
+          isShowOpeningStatement={featureConfig.openingStatement}
+
+          isShowSuggestedQuestionsAfterAnswer={featureConfig.suggestedQuestionsAfterAnswer}
+          isShowSpeechText={featureConfig.speechToText && currentProvider?.provider_name === 'openai'}
+        /> */}
         <DatasetConfig />
         {/* Variables */}
         <ConfigVar
@@ -143,24 +154,7 @@ const Config: FC = () => {
           onPromptVariablesChange={handlePromptVariablesNameChange}
         />
 
-        {/* Dataset */}
-
         {/* ChatConifig */}
-        {/* {
-          hasChatConfig && (
-            <ChatGroup
-              isShowOpeningStatement={featureConfig.openingStatement}
-              openingStatementConfig={
-                {
-                  value: introduction,
-                  onChange: setIntroduction,
-                }
-              }
-              isShowSuggestedQuestionsAfterAnswer={featureConfig.suggestedQuestionsAfterAnswer}
-              isShowSpeechText={featureConfig.speechToText && currentProvider?.provider_name === 'openai'}
-            />
-          )
-        } */}
 
         {/* TextnGeneration config */}
         {moreLikeThisConfig.enabled && (

@@ -12,6 +12,7 @@ export type IFeaturePanelProps = {
   isFocus?: boolean
   noBodySpacing?: boolean
   children?: ReactNode
+
 }
 
 const FeaturePanel: FC<IFeaturePanelProps> = ({
@@ -39,6 +40,7 @@ const FeaturePanel: FC<IFeaturePanelProps> = ({
           <div className='flex items-center space-x-1 shrink-0'>
             {headerIcon && <div className='flex items-center justify-center w-8 h-8'>{headerIcon}</div>}
             <div className='text-sm font-semibold text-gray-800'>{title}</div>
+
           </div>
           <div>
             {headerRight}

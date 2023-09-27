@@ -48,7 +48,7 @@ const CreateAppCard = forwardRef<HTMLAnchorElement>((_, ref) => {
                 <Box sx={{ padding: '2px', border: '1px solid #D9E1E7', borderRadius: '10px' }}>
                   <AddIcon style={{ color: '#FDC201' }} />
                 </Box>
-                <span style={{ marginLeft: '5px', color: '#202224' }}>Create New Datset</span>
+                <span style={{ marginLeft: '5px', color: '#202224' }}>Create New Dataset</span>
               </Button>
 
             </Grid>

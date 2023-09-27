@@ -126,7 +126,7 @@ function AppCard({
           />
           <div className="flex flex-row items-center h-9">
             <Tag className="mr-2" color={runningStatus ? 'green' : 'yellow'}>
-              {runningStatus ? t('appOverview.overview.status.running') : t('appOverview.overview.status.disable')}
+              {runningStatus ? t('appOverview.overview.status.running') : 'Inactive'}
             </Tag>
             <Switch defaultValue={runningStatus} onChange={onChangeStatus} />
           </div>
