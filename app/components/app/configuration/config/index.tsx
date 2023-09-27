@@ -11,7 +11,6 @@ import type { AutomaticRes } from './automatic/get-automatic-res'
 import GetAutomaticResModal from './automatic/get-automatic-res'
 import useFeature from './feature/use-feature'
 import ChooseFeature from './feature/choose-feature'
-import AutomaticBtn from './automatic/automatic-btn'
 import ConfigContext from '@/context/debug-configuration'
 import ConfigPrompt from '@/app/components/app/configuration/config-prompt'
 import ConfigVar from '@/app/components/app/configuration/config-var'
@@ -106,10 +105,10 @@ const Config: FC = () => {
   return (
     <>
       <div className="pb-[20px] bg-gray-50">
-        <div className='flex justify-between items-center mb-4'>
+        {/* <div className='flex justify-between items-center mb-4'>
 
           <AutomaticBtn onClick={showAutomaticTrue} />
-        </div>
+        </div> */}
 
         {showAutomatic && (
           <GetAutomaticResModal
