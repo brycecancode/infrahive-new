@@ -105,7 +105,7 @@ const translation = {
   variableTip:
     'Users fill variables in a form, automatically replacing variables in the prompt.',
   notSetVar: 'Variables allow users to introduce prompt words or opening remarks when filling out forms. You can try entering "{{input}}" in the prompt words.',
-  autoAddVar: 'Undefined variables referenced in pre-prompt, are you want to add them in user input form?',
+  autoAddVar: 'Undefined variables referenced in pre-prompt, Do you want to add them in user input form?',
   variableTable: {
     key: 'Variable Key',
     name: 'User Input Field Name',
