@@ -95,7 +95,7 @@ export type AppTokenCostsResponse = {
   data: Array<{ date: string; token_count: number; total_price: number; currency: number }>
 }
 
-export type UpdateAppModelConfigResponse = { result: string }
+export type UpdateAppModelConfigResponse = { result: string; message: string }
 
 export type ApikeyItemResponse = {
   id: string

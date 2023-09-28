@@ -6,6 +6,8 @@ import { useContext } from 'use-context-selector'
 import { usePathname } from 'next/navigation'
 import produce from 'immer'
 import { useBoolean } from 'ahooks'
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import Button from '../../base/button'
 import Loading from '../../base/loading'
 import type { CompletionParams, Inputs, ModelConfig, MoreLikeThisConfig, PromptConfig, PromptVariable } from '@/models/debug'
@@ -24,6 +26,7 @@ import { fetchAppDetail, updateAppModelConfig } from '@/service/apps'
 import { promptVariablesToUserInputsForm, userInputsFormToPromptVariables } from '@/utils/model-config'
 import { fetchDatasets } from '@/service/datasets'
 import AccountSetting from '@/app/components/header/account-setting'
+import useLeaveConfirmation from '@/hooks/useLeaveConfirmation'
 
 const Configuration: FC = () => {
   const { t } = useTranslation()
@@ -181,7 +184,16 @@ const Configuration: FC = () => {
     })
   }, [appId])
 
+  const [updateCount, setUpdateCount] = useState(0)
+  const [showDisacardWarning, setShowDiscardWarning] = useState(false)
+  const [showAppPublished, setShowAppPublished] = useState(false)
+  useEffect(() => {
+    setUpdateCount((count) => {
+      return count + 1
+    })
+  }, [completionParams, introduction, modelConfig, moreLikeThisConfig, speechToTextConfig, suggestedQuestionsAfterAnswerConfig, dataSets])
   const saveAppConfig = async () => {
+    setUpdateCount(2)
     const modelId = modelConfig.model_id
     const promptTemplate = modelConfig.configs.prompt_template
     const promptVariables = modelConfig.configs.prompt_variables
@@ -224,7 +236,7 @@ const Configuration: FC = () => {
       modelConfig: newModelConfig,
       completionParams,
     })
-    notify({ type: 'success', message: t('common.api.success'), duration: 3000 })
+    setShowAppPublished(true)
   }
 
   const [showConfirm, setShowConfirm] = useState(false)
@@ -235,7 +247,7 @@ const Configuration: FC = () => {
 
   const [showUseGPT4Confirm, setShowUseGPT4Confirm] = useState(false)
   const [showSetAPIKeyModal, setShowSetAPIKeyModal] = useState(false)
-
+  const { confirmationDialog } = useLeaveConfirmation(updateCount > 2)
   if (isLoading) {
     return <div className='flex h-full items-center justify-center'>
       <Loading type='area' />
@@ -276,76 +288,93 @@ const Configuration: FC = () => {
       setDataSets,
     }}
     >
-      <>
-        <div className="flex flex-col h-full bg-gray-50">
-          <div className='flex items-center justify-between px-6 border-b shrink-0 h-14 ' >
-            <div className='text-xl text-gray-900'></div>
-            <div className='flex items-center'>
-              {/* Model and Parameters */}
-              <ConfigModel
-                mode={mode}
-                completionParams={completionParams}
-                modelId={modelConfig.model_id}
-                setModelId={setModelId}
-                onCompletionParamsChange={(newParams: CompletionParams) => {
-                  setCompletionParams(newParams)
-                }}
-                disabled={!hasSetAPIKEY}
-                canUseGPT4={hasSetCustomAPIKEY}
-                onShowUseGPT4Confirm={() => {
-                  setShowUseGPT4Confirm(true)
-                }}
-              />
-              <div className='mx-3 w-[1px] h-[14px] bg-gray-200'></div>
-              <Button onClick={() => setShowConfirm(true)} className='shrink-0 mr-2 w-[70px] !h-8 !text-[13px] font-medium'>{t('appDebug.operation.resetConfig')}</Button>
-              <Button type='primary' onClick={saveAppConfig} className='shrink-0 w-[70px] !h-8 !text-[13px] font-medium'>{t('appDebug.operation.applyConfig')}</Button>
-            </div>
-          </div>
-          <div className='flex grow h-[200px] bg-gray-50 '>
-            <div className="w-[574px] shrink-0 h-full overflow-y-auto border-r py-4 px-6">
-              <Config />
-            </div>
-            <div className="relative grow h-full overflow-y-auto  py-4 px-6 bg-gray-50 flex flex-col">
-              <Debug hasSetAPIKEY={hasSetAPIKEY} onSetting={showSetAPIKey} />
-            </div>
+
+      <div className="flex flex-col h-full bg-gray-50">
+        <div className='flex items-center justify-between px-6 border-b shrink-0 h-14 ' >
+          <div className='text-xl text-gray-900'></div>
+          <div className='flex items-center'>
+            {/* Model and Parameters */}
+            <ConfigModel
+              mode={mode}
+              completionParams={completionParams}
+              modelId={modelConfig.model_id}
+              setModelId={setModelId}
+              onCompletionParamsChange={(newParams: CompletionParams) => {
+                setCompletionParams(newParams)
+              }}
+              disabled={!hasSetAPIKEY}
+              canUseGPT4={hasSetCustomAPIKEY}
+              onShowUseGPT4Confirm={() => {
+                setShowUseGPT4Confirm(true)
+              }}
+            />
+            <div className='mx-3 w-[1px] h-[14px] bg-gray-200'></div>
+            <Button onClick={() => setShowConfirm(true)} className='shrink-0 mr-2 w-[70px] !h-8 !text-[13px] font-medium'>{t('appDebug.operation.resetConfig')}</Button>
+            <Button type='primary' onClick={saveAppConfig} disabled={updateCount < 3} className='shrink-0 w-[70px] !h-8 !text-[13px] font-medium'>{t('appDebug.operation.applyConfig')}</Button>
           </div>
         </div>
-        {showConfirm && (
-          <Confirm
-            title={t('appDebug.resetConfig.title')}
-            content={t('appDebug.resetConfig.message')}
-            isShow={showConfirm}
-            onClose={() => setShowConfirm(false)}
-            onConfirm={resetAppConfig}
-            onCancel={() => setShowConfirm(false)}
-          />
-        )}
-        {showUseGPT4Confirm && (
-          <Confirm
-            title={t('appDebug.trailUseGPT4Info.title')}
-            content={t('appDebug.trailUseGPT4Info.description')}
-            isShow={showUseGPT4Confirm}
-            onClose={() => setShowUseGPT4Confirm(false)}
-            onConfirm={() => {
-              setShowSetAPIKeyModal(true)
-              setShowUseGPT4Confirm(false)
-            }}
-            onCancel={() => setShowUseGPT4Confirm(false)}
-          />
-        )}
-        {
-          showSetAPIKeyModal && (
-            <AccountSetting activeTab="provider" onCancel={async () => {
-              setShowSetAPIKeyModal(false)
-            }} />
-          )
-        }
-        {isShowSetAPIKey && <AccountSetting activeTab="provider" onCancel={async () => {
-          await checkAPIKey()
-          hideSetAPIkey()
-        }} />}
-      </>
-    </ConfigContext.Provider>
+        <div className='flex grow h-[200px] bg-gray-50 '>
+          <div className="w-[574px] shrink-0 h-full overflow-y-auto border-r py-4 px-6">
+            <Config />
+          </div>
+          <div className="relative grow h-full overflow-y-auto  py-4 px-6 bg-gray-50 flex flex-col">
+            <Debug hasSetAPIKEY={hasSetAPIKEY} onSetting={showSetAPIKey} />
+          </div>
+        </div>
+      </div>
+      <Dialog
+        open={showAppPublished}
+        onClose={() => setShowAppPublished(false)}
+      >
+        <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}> <CheckCircleIcon sx={{ color: '#fbbf24', fontSize: '1.5rem', marginRight: '0.6rem' }} /> App Published   </DialogTitle>
+        <Divider />
+        <DialogContent>
+          <DialogContentText >
+            Successfully published, visit overview tab to get the link for your chatbot that you can share with users.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button type='primary' onClick={() => setShowAppPublished(false)}>Ok</Button>
+        </DialogActions>
+      </Dialog>
+      {confirmationDialog}
+      {showConfirm && (
+        <Confirm
+          title={t('appDebug.resetConfig.title')}
+          content={t('appDebug.resetConfig.message')}
+          isShow={showConfirm}
+          onClose={() => setShowConfirm(false)}
+          onConfirm={resetAppConfig}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
+
+      {showUseGPT4Confirm && (
+        <Confirm
+          title={t('appDebug.trailUseGPT4Info.title')}
+          content={t('appDebug.trailUseGPT4Info.description')}
+          isShow={showUseGPT4Confirm}
+          onClose={() => setShowUseGPT4Confirm(false)}
+          onConfirm={() => {
+            setShowSetAPIKeyModal(true)
+            setShowUseGPT4Confirm(false)
+          }}
+          onCancel={() => setShowUseGPT4Confirm(false)}
+        />
+      )}
+      {
+        showSetAPIKeyModal && (
+          <AccountSetting activeTab="provider" onCancel={async () => {
+            setShowSetAPIKeyModal(false)
+          }} />
+        )
+      }
+      {isShowSetAPIKey && <AccountSetting activeTab="provider" onCancel={async () => {
+        await checkAPIKey()
+        hideSetAPIkey()
+      }} />}
+
+    </ConfigContext.Provider >
   )
 }
 export default React.memo(Configuration)
