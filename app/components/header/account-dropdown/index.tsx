@@ -13,6 +13,7 @@ import Avatar from '@/app/components/base/avatar'
 import { useAppContext } from '@/context/app-context'
 import { ChevronDown } from '@/app/components/base/icons/src/vender/line/arrows'
 import { LogOut01 } from '@/app/components/base/icons/src/vender/line/general'
+import { logout } from '@/service/common'
 
 export default function AppSelector() {
   const itemClassName = `
@@ -28,6 +29,11 @@ export default function AppSelector() {
   const { userProfile, langeniusVersionInfo } = useAppContext()
 
   const handleLogout = async () => {
+    const refresh_token = localStorage.getItem('refresh_token')
+    await logout({
+      url: '/logout',
+      body: { refresh_token },
+    })
     localStorage.setItem('mainToken', '')
     router.push('/signin')
   }

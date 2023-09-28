@@ -92,6 +92,8 @@ const NormalForm = () => {
         },
       })
       localStorage.setItem('mainToken', data.access_token)
+      localStorage.setItem('refresh_token', data.refresh_token || '')
+
       router.push('/apps')
     }
     finally {

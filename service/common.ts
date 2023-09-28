@@ -34,8 +34,8 @@ export const fetchTenantInfo: Fetcher<TenantInfoResponse, { url: string }> = ({ 
   return get(url) as Promise<TenantInfoResponse>
 }
 
-export const logout: Fetcher<CommonResponse, { url: string; params: Record<string, any> }> = ({ url, params }) => {
-  return get(url, params) as Promise<CommonResponse>
+export const logout: Fetcher<CommonResponse, { url: string; body: Record<string, any> }> = ({ url, body }) => {
+  return post(url, { body }) as Promise<CommonResponse>
 }
 
 export const fetchLanggeniusVersion: Fetcher<LangGeniusVersionResponse, { url: string; params: Record<string, any> }> = ({ url, params }) => {
