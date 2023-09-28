@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 import SettingsModal from './settings'
 import ShareLink from './share-link'
 import EmbeddedModal from './embedded'
-import CustomizeModal from './customize'
 import Tooltip from '@/app/components/base/tooltip'
 import AppBasic, { randomString } from '@/app/components/app-sidebar/basic'
 import Button from '@/app/components/base/button'
@@ -211,13 +210,13 @@ function AppCard({
               appBaseUrl={app_base_url}
               accessToken={access_token}
             />
-            <CustomizeModal
+            {/* <CustomizeModal
               isShow={showCustomizeModal}
               linkUrl=""
               onClose={() => setShowCustomizeModal(false)}
               appId={appInfo.id}
               mode={appInfo.mode}
-            />
+            /> */}
           </>
         )
         : null}
