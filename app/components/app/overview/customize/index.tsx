@@ -1,7 +1,6 @@
 'use client'
 import type { FC } from 'react'
 import React from 'react'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import type { AppMode } from '@/types/app'
@@ -59,9 +58,9 @@ const CustomizeModal: FC<IShareLinkProps> = ({
         <div className='flex flex-col'>
           <div className='text-gray-900'>{t(`${prefixCustomize}.way1.step1`)}</div>
           <div className='text-gray-500 text-xs mt-1 mb-2'>{t(`${prefixCustomize}.way1.step1Tip`)}</div>
-          <a href={`https://github.com/langgenius/${isChatApp ? 'webapp-conversation' : 'webapp-text-generator'}`} target='_blank'>
+          {/* <a href={`https://github.com/langgenius/${isChatApp ? 'webapp-conversation' : 'webapp-text-generator'}`} target='_blank'>
             <Button className='text-gray-800 text-sm w-fit'><GithubIcon className='text-gray-800 mr-2' />{t(`${prefixCustomize}.way1.step1Operation`)}</Button>
-          </a>
+          </a> */}
         </div>
       </div>
       <div className='flex py-4'>
@@ -92,13 +91,13 @@ const CustomizeModal: FC<IShareLinkProps> = ({
     <div className='w-full mt-4 px-6 py-5 border-gray-200 rounded-lg border-[0.5px]'>
       <Tag bordered={true} hideBg={true} className='text-primary-600 border-primary-600 uppercase'>{t(`${prefixCustomize}.way`)} 2</Tag>
       <p className='mt-2 text-base font-medium text-gray-800'>{t(`${prefixCustomize}.way2.name`)}</p>
-      <Button
+      {/* <Button
         className='w-36 mt-2'
         onClick={() => window.open(`https://docs.infrahive.ai/${locale.toLowerCase()}/application/developing-with-apis`, '_blank')}
       >
         <span className='text-sm text-gray-800'>{t(`${prefixCustomize}.way2.operation`)}</span>
         <ArrowTopRightOnSquareIcon className='w-4 h-4 ml-1 text-gray-800 shrink-0' />
-      </Button>
+      </Button> */}
     </div>
   </Modal>
 }
