@@ -1,5 +1,6 @@
 export type CommonResponse = {
   result: 'success' | 'fail'
+  message?: string
 }
 export type LoginResponse = {
   access_token: string

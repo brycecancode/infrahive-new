@@ -82,11 +82,12 @@ const NormalForm = () => {
       })
       return
     }
-    if (firstName && lastName && password) {
+    if (!firstName || !lastName || !password) {
       Toast.notify({
         type: 'error',
         message: 'Please fill all required fields.',
       })
+      return
     }
     try {
       setIsLoading(true)
@@ -103,14 +104,14 @@ const NormalForm = () => {
       if (data?.result === 'success') {
         Toast.notify({
           type: 'success',
-          message: 'Register success.',
+          message: data.message,
         })
         router.push('/signin')
       }
       else {
         Toast.notify({
           type: 'error',
-          message: 'Register failed.',
+          message: data.message,
         })
       }
     }
