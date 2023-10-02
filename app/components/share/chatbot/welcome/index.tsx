@@ -342,8 +342,8 @@ const Welcome: FC<IWelcomeProps> = ({
               </div>
               : <div>
               </div>}
-            {plan === 'basic' && <a className='flex items-center pr-3 space-x-3' href="https://infrahive.ai/" target="_blank">
-              <span className='uppercase'>{t('share.chat.powerBy')}</span>
+            {plan === 'basic' && <a className='flex items-center pr-3 space-x-3' href="https://infrahive.io" target="_blank">
+              <span className='uppercase'>Powered By InfraHive.</span>
               <FootLogo />
             </a>}
           </div>

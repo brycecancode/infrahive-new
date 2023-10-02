@@ -42,17 +42,7 @@ export default function AccountAbout({
           <InfraHive className='mx-auto mb-2' />
           <div className='mb-3 text-center text-xs font-normal text-gray-500'>Version {langeniusVersionInfo?.current_version}</div>
           <div className='mb-4 text-center text-xs font-normal text-gray-700'>
-            <div>© 2023 LangGenius, Inc., Contributors.</div>
-            <div className='text-[#1C64F2]'>
-              {
-                IS_CE_EDITION
-                  ? <Link href={'https://github.com/langgenius/infrahive/blob/main/LICENSE'} target='_blank'>Open Source License</Link>
-                  : <>
-                    <Link href={'https://docs.infrahive.ai/user-agreement/privacy-policy'} target='_blank'>Privacy Policy</Link>,
-                    <Link href={'https://docs.infrahive.ai/user-agreement/terms-of-service'} target='_blank'>Terms of Service</Link>
-                  </>
-              }
-            </div>
+
           </div>
         </div>
         <div className='mb-4 -mx-8 h-[0.5px] bg-gray-200' />
