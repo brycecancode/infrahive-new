@@ -97,13 +97,19 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
       return
     isCreatingRef.current = true
     try {
-      const app = await createApp({
-        name,
-        icon: emoji.icon,
-        icon_background: emoji.icon_background,
-        mode: isWithTemplate ? templates.data[selectedTemplateIndex].mode : newAppMode!,
-        config: isWithTemplate ? templates.data[selectedTemplateIndex].model_config : undefined,
-      })
+      const data = new FormData()
+      data.append('name', name)
+      data.append('icon', emoji.icon)
+      data.append('icon_background', emoji.icon_background)
+      if (isWithTemplate) {
+        data.append('mode', templates.data[selectedTemplateIndex].mode)
+        data.append('config', JSON.stringify(templates.data[selectedTemplateIndex].model_config))
+      }
+      else {
+        data.append('mode', newAppMode!)
+      }
+      data.append('is_icon', 'true')
+      const app = await createApp(data)
       if (onSuccess)
         onSuccess()
       if (onClose)
@@ -113,6 +119,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
       router.push(`/app/${app.id}/configuration`)
     }
     catch (e) {
+      console.log(e)
       notify({ type: 'error', message: t('app.newApp.appCreateFailed') })
     }
     isCreatingRef.current = false

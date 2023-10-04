@@ -49,6 +49,7 @@ type IOtherOptions = {
   onError?: IOnError
   onCompleted?: IOnCompleted // for stream
   getAbortController?: (abortController: AbortController) => void
+  isFormData?: boolean
 }
 
 function unicodeToChar(text: string) {
@@ -158,6 +159,7 @@ const baseFetch = (
     bodyStringify = true,
     needAllResponseContent,
     deleteContentType,
+    isFormData = false,
   }: IOtherOptions,
 ) => {
   const options = Object.assign({}, baseOptions, fetchOptions)
@@ -182,13 +184,15 @@ const baseFetch = (
       options.headers.set('Authorization', `Bearer ${accessToken}`)
   }
 
-  if (deleteContentType) {
+  if (deleteContentType || isFormData) {
     options.headers.delete('Content-Type')
   }
   else {
     const contentType = options.headers.get('Content-Type')
-    if (!contentType)
-      options.headers.set('Content-Type', ContentType.json)
+    if (!contentType) {
+      if (options.body)
+        options.headers.set('Content-Type', ContentType.json)
+    }
   }
 
   const urlPrefix = isPublicAPI ? PUBLIC_API_PREFIX : API_PREFIX
@@ -208,7 +212,7 @@ const baseFetch = (
     delete options.params
   }
 
-  if (body && bodyStringify)
+  if (body && bodyStringify && !isFormData)
     options.body = JSON.stringify(body)
 
   // Handle timeout
