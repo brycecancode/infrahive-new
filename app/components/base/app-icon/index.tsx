@@ -15,6 +15,8 @@ export type AppIconProps = {
   className?: string
   innerIcon?: React.ReactNode
   onClick?: () => void
+  isIcon?: boolean
+  image?: string
 }
 
 const AppIcon: FC<AppIconProps> = ({
@@ -24,24 +26,38 @@ const AppIcon: FC<AppIconProps> = ({
   background,
   className,
   innerIcon,
+  isIcon = true,
+  image,
+
   onClick,
 }) => {
-  return (
-    <span
-      className={classNames(
-        style.appIcon,
-        size !== 'medium' && style[size],
-        rounded && style.rounded,
-        className ?? '',
-      )}
-      style={{
-        background,
-      }}
-      onClick={onClick}
-    >
-      {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🤖' />)}
-    </span>
-  )
+  if (isIcon) {
+    return (
+      <span
+        className={classNames(
+          style.appIcon,
+          size !== 'medium' && style[size],
+          rounded && style.rounded,
+          className ?? '',
+        )}
+        style={{
+          background,
+        }}
+        onClick={onClick}
+      >
+
+        {innerIcon || ((icon && icon !== '') ? <em-emoji id={icon} /> : <em-emoji id='🤖' />)}
+      </span>
+    )
+  }
+  else {
+    return <img src={image} className={classNames(
+      style.appIcon,
+      size !== 'medium' && style[size],
+      rounded && style.rounded,
+      className ?? '',
+    )} />
+  }
 }
 
 export default AppIcon

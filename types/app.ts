@@ -205,6 +205,8 @@ export type App = {
   icon: string
   /** Icon Background */
   icon_background: string
+  image: string
+  is_icon: boolean
 
   /** Mode */
   mode: AppMode

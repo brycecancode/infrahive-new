@@ -51,7 +51,7 @@ const AppCard = ({
     <>
       <Link href={`/app/${app.id}/configuration`} className={style.listItem}>
         <div className={style.listItemTitle}>
-          <AppIcon size='small' icon={app.icon} background={app.icon_background} />
+          <AppIcon size='small' icon={app.icon} background={app.icon_background} image={app.image} isIcon={app.is_icon} />
           <div className={style.listItemHeading}>
             <div className={style.listItemHeadingContent}>{app.name}</div>
           </div>

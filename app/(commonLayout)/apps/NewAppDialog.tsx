@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useContext, useContextSelector } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
 import { Box, Grid, Typography } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 
 import style from '../list.module.css'
 import AppModeLabel from './AppModeLabel'
@@ -59,6 +60,8 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
   // Emoji Picker
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [emoji, setEmoji] = useState({ icon: '🤖', icon_background: '#FFEAD5' })
+  const [isIcon, setIsIcon] = useState(true)
+  const [image, setImage] = useState(null)
 
   const mutateApps = useContextSelector(AppsContext, state => state.mutateApps)
 
@@ -69,6 +72,11 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
   )
   const isSelected = (appType: any) => {
     return appType.mode === newAppMode
+  }
+  const hiddenFileInput = useRef(null)
+  const onImageChange = (event) => {
+    const fileUploaded = event.target.files[0]
+    setImage(fileUploaded)
   }
 
   useEffect(() => {
@@ -99,7 +107,19 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
     try {
       const data = new FormData()
       data.append('name', name)
-      data.append('icon', emoji.icon)
+      if (isIcon) {
+        data.append('icon', emoji.icon)
+      }
+      else {
+        if (image) {
+          data.append('image', image)
+        }
+        else {
+          notify({ type: 'error', message: 'Please select a image' })
+          return
+        }
+      }
+
       data.append('icon_background', emoji.icon_background)
       if (isWithTemplate) {
         data.append('mode', templates.data[selectedTemplateIndex].mode)
@@ -108,7 +128,7 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
       else {
         data.append('mode', newAppMode!)
       }
-      data.append('is_icon', 'true')
+      data.append('is_icon', isIcon.toString())
       const app = await createApp(data)
       if (onSuccess)
         onSuccess()
@@ -148,9 +168,25 @@ const NewAppDialog = ({ show, onSuccess, onClose }: NewAppDialogProps) => {
     >
       <h3 className={style.newItemCaption}>{t('app.newApp.captionName')}</h3>
 
-      <div className='flex items-center justify-between gap-3 mb-8'>
-        <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' icon={emoji.icon} background={emoji.icon_background} />
-        <input ref={nameInputRef} className='h-10 px-3 text-sm font-normal bg-gray-100 rounded-lg grow' />
+      <div className='flex items-center justify-between gap-3 mb-8 align-center'>
+        <div className='flex  flex-col items-center'>
+          {isIcon
+            ? <AppIcon size='large' onClick={() => { setShowEmojiPicker(true) }} className='cursor-pointer' icon={emoji.icon} background={emoji.icon_background} />
+            : <div className="flex cursor-pointer rounded-md shadow-sm  items-center align-center" onClick={() => hiddenFileInput.current && hiddenFileInput.current.click()}>
+              <span >
+                <input ref={hiddenFileInput} type="file" id="imageInput" className="sr-only" onChange={onImageChange} />
+                {image ? <img src={URL.createObjectURL(image)} className="w-8 h-8" /> : <AddIcon style={{ color: '#FDC201' }} className="w-8 h-8" />}
+              </span>
+            </div>
+          }
+          <div style={{ fontSize: '0.8rem', cursor: 'pointer', color: '#FDC201' }} onClick={() => {
+            setIsIcon(!isIcon)
+            setImage(null)
+          }}>Use {isIcon ? 'Image' : 'Emo'}</div>
+        </div>
+
+        <input ref={nameInputRef} className='h-10 px-2 mb-5 text-sm font-normal bg-gray-100 rounded-lg grow' />
+
       </div>
 
       <div className='h-[247px]'>
