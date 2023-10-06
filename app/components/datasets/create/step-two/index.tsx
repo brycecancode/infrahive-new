@@ -219,10 +219,10 @@ const StepTwo = ({
 
   const getFileIndexingEstimateParams = (docForm: DocForm) => {
     let params
-    if (dataSourceType === DataSourceType.FILE) {
+    if (dataSourceType === DataSourceType.FILE || dataSourceType === DataSourceType.WEB) {
       params = {
         info_list: {
-          data_source_type: dataSourceType,
+          data_source_type: DataSourceType.FILE,
           file_info_list: {
             file_ids: files.map(file => file.id),
           },

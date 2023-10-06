@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useContext } from 'use-context-selector'
 import cn from 'classnames'
+import { TextField } from '@mui/material'
 import s from './index.module.css'
 import type { File as FileEntity } from '@/models/datasets'
 import { ToastContext } from '@/app/components/base/toast'
 
 import { upload } from '@/service/base'
+import Button from '@/app/components/base/button'
 
 type IFileUploaderProps = {
   fileList: any[]
@@ -16,6 +18,7 @@ type IFileUploaderProps = {
   onFileUpdate: (fileItem: any, progress: number, list: any[]) => void
   onFileListUpdate?: (files: any) => void
   onPreview: (file: FileEntity) => void
+  isWebsite?: boolean
 }
 
 const ACCEPTS = [
@@ -40,6 +43,7 @@ const FileUploader = ({
   onFileUpdate,
   onFileListUpdate,
   onPreview,
+  isWebsite = false,
 }: IFileUploaderProps) => {
   const { t } = useTranslation()
   const { notify } = useContext(ToastContext)
@@ -47,9 +51,9 @@ const FileUploader = ({
   const dropRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<HTMLDivElement>(null)
   const fileUploader = useRef<HTMLInputElement>(null)
-
+  const [isLoading, setLoading] = useState(false)
   const fileListRef = useRef<any>([])
-
+  const [website, setWebsite] = useState('')
   // utils
   const getFileType = (currentFile: File) => {
     if (!currentFile)
@@ -189,11 +193,39 @@ const FileUploader = ({
     fileListRef.current = fileListRef.current.filter((item: any) => item.fileID !== fileID)
     onFileListUpdate?.([...fileListRef.current])
   }
+
   const fileChangeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = [...(e.target.files ?? [])].filter(file => isValid(file))
     initialUpload(files)
   }
 
+  const onAddWebsite = async () => {
+    setLoading(true)
+    const formData = new FormData()
+    formData.append('url', website)
+    formData.append('is_url', 'true')
+    const fileID = `web-${Date.now()}`
+    try {
+      const res = await upload({
+        xhr: new XMLHttpRequest(),
+        data: formData,
+      })
+      const completeFile = {
+        fileID,
+        file: res,
+      }
+
+      onFileUpdate(completeFile, 100, [...fileList, completeFile])
+      setLoading(false)
+
+      return await Promise.resolve({ ...completeFile })
+    }
+    catch {
+      notify({ type: 'error', message: 'Error adding website, make sure it is a valid link.' })
+      setLoading(false)
+      return await Promise.resolve({})
+    }
+  }
   useEffect(() => {
     dropRef.current?.addEventListener('dragenter', handleDragEnter)
     dropRef.current?.addEventListener('dragover', handleDragOver)
@@ -207,8 +239,52 @@ const FileUploader = ({
     }
   }, [])
 
+  if (isWebsite) {
+    return <div className='mb-10'>
+      <div className='flex  py-10'>
+        <TextField id="outlined-basic" label="Website Link" variant="outlined" value={website} onChange={e => setWebsite(e.target.value)} fullWidth size='small' />
+        <Button type='primary' className="ml-5" onClick={onAddWebsite} loading={isLoading}>Add</Button>
+      </div>
+      <div className={s.fileList}>
+        {fileList.map((fileItem, index) => (
+          <div
+            key={`${fileItem.fileID}-${index}`}
+            onClick={() => fileItem.file?.id && onPreview(fileItem.file)}
+            className={cn(
+              s.file,
+              fileItem.progress < 100 && s.uploading,
+              // s.active,
+            )}
+          >
+            {fileItem.progress < 100 && (
+              <div className={s.progressbar} style={{ width: `${fileItem.progress}%` }} />
+            )}
+            <div className={s.fileInfo}>
+              <div className={cn(s.fileIcon, s[getFileType(fileItem.file)])} />
+              <div className={s.filename}>{fileItem.file.name}</div>
+              <div className={s.size}>{getFileSize(fileItem.file.size)}</div>
+            </div>
+            <div className={s.actionWrapper}>
+              {(fileItem.progress < 100 && fileItem.progress >= 0) && (
+                <div className={s.percent}>{`${fileItem.progress}%`}</div>
+              )}
+              {fileItem.progress === 100 && (
+                <div className={s.remove} onClick={(e) => {
+                  e.stopPropagation()
+                  removeFile(fileItem.fileID)
+                }} />
+              )}
+            </div>
+          </div>
+        ))}
+
+      </div>
+    </div>
+  }
+
   return (
     <div className={s.fileUploader}>
+
       <input
         ref={fileUploader}
         id="fileUploader"
