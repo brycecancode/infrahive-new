@@ -21,5 +21,4 @@ const AppModeLabel = ({
     </span>
   )
 }
-
 export default AppModeLabel
