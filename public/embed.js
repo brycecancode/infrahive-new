@@ -14,8 +14,8 @@ async function embedChatbot () {
     console.error('infrahiveChatbotConfig is empty or token is not provided')
     return;
   }
-  const isDev = !!infrahiveChatbotConfig.isDev
-  const baseUrl = infrahiveChatbotConfig.baseUrl || `https://${isDev ? 'dev.' : ''}uinfrahive.app`
+
+  const baseUrl = 'https://infrahive-skysoftware.vercel.app'
   const openIcon = `<svg
             id="openIcon"
             width="24"
