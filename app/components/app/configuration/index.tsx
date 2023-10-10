@@ -224,7 +224,7 @@ const Configuration: FC = () => {
       },
     }
 
-    await updateAppModelConfig({ url: `/apps/${appId}/model-config`, body: data })
+    await updateAppModelConfig({ url: `/apps/${appId}/model-config`, body: { ...data, mode } })
     const newModelConfig = produce(modelConfig, (draft: any) => {
       draft.opening_statement = introduction
       draft.more_like_this = moreLikeThisConfig
