@@ -104,48 +104,94 @@ const StepOne = ({
           <Grid item xs={12} md={6}>
             {
               shouldShowDataSourceTypeList && (
-                <button onClick={() => {
-                  if (dataSourceTypeDisable)
-                    return
-                  changeType(DataSourceType.FILE)
-                  hideFilePreview()
-                  hideNotionPagePreview()
-                }} className="w-full hover:bg-[#F4F9FB] my-2 bg-[#F6F6F9] rounded-xl">
-                  <Box
-                    sx={{
-                      padding: '10px 20px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      borderRadius: '10px',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div className="flex gap-2 items-center">
-                      <div className="border-2 rounded-md p-4 w-[70px]">
-                        <img alt="image" src={FromFileIcon} width={20} height={20} style={{ marginTop: 4 }} />
-                      </div>
-                      <div className="w-[80%]">
-                        <p className="text-[#202224]">Import from text file</p>
-                      </div>
-                    </div>
-                    <div>
-                      {dataSourceType === DataSourceType.FILE && (
-                        <div className="bg-[#7ED19F] p-1 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
-                            <path d="M15.3673 2L6.01019 12.6972L2 8.68572" fill="#7ED19F" />
-                            <path
-                              d="M15.3673 2L6.01019 12.6972L2 8.68572"
-                              stroke="white"
-                              stroke-width="3"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
+                <>
+                  <button onClick={() => {
+                    if (dataSourceTypeDisable)
+                      return
+                    changeType(DataSourceType.FILE)
+                    hideFilePreview()
+                    hideNotionPagePreview()
+                  }} className="w-full hover:bg-[#F4F9FB] my-2 bg-[#F6F6F9] rounded-xl">
+                    <Box
+                      sx={{
+                        padding: '10px 20px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        borderRadius: '10px',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <div className="flex gap-2 items-center">
+                        <div className="border-2 rounded-md p-4 w-[70px]">
+                          <img alt="image" src={FromFileIcon} width={20} height={20} style={{ marginTop: 4 }} />
                         </div>
-                      )}
-                    </div>
-                  </Box>
-                </button>
+                        <div className="w-[80%]">
+                          <p className="text-[#202224]">Import from text file</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        {dataSourceType === DataSourceType.FILE && (
+                          <div className="bg-[#7ED19F] p-1 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
+                              <path d="M15.3673 2L6.01019 12.6972L2 8.68572" fill="#7ED19F" />
+                              <path
+                                d="M15.3673 2L6.01019 12.6972L2 8.68572"
+                                stroke="white"
+                                stroke-width="3"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    </Box>
+                  </button>
+                  <button onClick={() => {
+                    if (dataSourceTypeDisable)
+                      return
+                    changeType(DataSourceType.WEB)
+                    hideFilePreview()
+                    hideNotionPagePreview()
+                  }} className="w-full hover:bg-[#F4F9FB] my-2 bg-[#F6F6F9] rounded-xl">
+                    <Box
+                      sx={{
+                        padding: '10px 20px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        borderRadius: '10px',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <div className="flex gap-2 items-center">
+                        <div className="border-2 rounded-md p-4 w-[70px]">
+                          <img alt="image" src={FromWebsite} width={20} height={20} style={{ marginTop: 4 }} />
+                        </div>
+                        <div className="w-[80%]">
+                          <p className="text-[#202224]">Import from Web</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        {dataSourceType === DataSourceType.WEB && (
+                          <div className="bg-[#7ED19F] p-1 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
+                              <path d="M15.3673 2L6.01019 12.6972L2 8.68572" fill="#7ED19F" />
+                              <path
+                                d="M15.3673 2L6.01019 12.6972L2 8.68572"
+                                stroke="white"
+                                stroke-width="3"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    </Box>
+                  </button>
+                </>
 
               )
             }
@@ -154,6 +200,20 @@ const StepOne = ({
             {dataSourceType === DataSourceType.FILE && (
               <div className='flex flex-col'>
                 <FileUploader
+                  fileList={files}
+                  titleClassName={!shouldShowDataSourceTypeList ? 'mt-[30px] !mb-[44px] !text-lg !font-semibold !text-gray-900' : undefined}
+                  prepareFileList={updateFileList}
+                  onFileListUpdate={updateFileList}
+                  onFileUpdate={updateFile}
+                  onPreview={updateCurrentFile}
+                />
+                <Button disabled={nextDisabled} className={s.submitButton} type='primary' onClick={onStepChange}>Next</Button>
+              </div>
+            )}
+            {dataSourceType === DataSourceType.WEB && (
+              <div className='flex flex-col'>
+                <FileUploader
+                  isWebsite={true}
                   fileList={files}
                   titleClassName={!shouldShowDataSourceTypeList ? 'mt-[30px] !mb-[44px] !text-lg !font-semibold !text-gray-900' : undefined}
                   prepareFileList={updateFileList}
