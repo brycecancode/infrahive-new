@@ -54,13 +54,14 @@ const Apps: FC = () => {
     const { app_model_config: model_config } = await fetchAppDetail(currApp?.app.id as string)
 
     try {
-      const app = await createApp({
-        name,
-        icon,
-        icon_background,
-        mode: currApp?.app.mode as any,
-        config: model_config,
-      })
+      const data = new FormData()
+      data.append('name', name)
+      data.append('icon', icon)
+      data.append('icon_background', icon_background)
+      data.append('mode', currApp?.app.mode as any)
+      data.append('config', JSON.stringify(model_config))
+      data.append('is_icon', 'true')
+      const app = await createApp(data)
       setIsShowCreateModal(false)
       Toast.notify({
         type: 'success',
