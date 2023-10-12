@@ -15,7 +15,7 @@ async function embedChatbot () {
     return;
   }
 
-  const baseUrl = 'https://infrahive-skysoftware.vercel.app'
+  const baseUrl = 'https://platform.infrahive.io'
   const openIcon = `<svg
             id="openIcon"
             width="24"
