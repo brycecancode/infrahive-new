@@ -5,6 +5,8 @@ import { styled } from '@mui/material/styles'
 // import Banner from 'ui-component/extended/Banner';
 
 import { useEffect, useState } from 'react'
+import { redirect } from 'next/navigation'
+import { Loading } from './components/base/icons/src/public/thought'
 import ApiServices from '@/app/components/landingpage/ApiServices'
 import AppBar from '@/app/components/landingpage/AppBar'
 
@@ -82,8 +84,9 @@ const Landing = () => {
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
+    redirect('/apps')
   }, [])
-
+  return <Loading />
   return mounted && (
     <>
       <HeaderWrapper id="home">
