@@ -1,14 +1,21 @@
 'use client'
 import { Box, Drawer, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard'
 import Storage from '@mui/icons-material/Storage'
 import Explore from '@mui/icons-material/Explore'
 import DatasetIcon from '@mui/icons-material/Dataset'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation'
+import { t } from 'i18next'
+import Sidebar from '../explore/sidebar'
 import s from './index.module.css'
+import { useAppContext } from '@/context/app-context'
+import ExploreContext from '@/context/explore-context'
+import type { InstalledApp } from '@/models/explore'
+import { fetchMembers } from '@/service/common'
+
 type SidebarProps = {
   children: React.ReactNode
 }
@@ -53,6 +60,24 @@ const SideBar = (props: SidebarProps) => {
     breadcrumbs: false,
   },
   ]
+  const [controlUpdateInstalledApps, setControlUpdateInstalledApps] = useState(0)
+  const { userProfile } = useAppContext()
+  const [hasEditPermission, setHasEditPermission] = useState(false)
+  const [installedApps, setInstalledApps] = useState<InstalledApp[]>([])
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (pathname === '/explore/apps') {
+      document.title = `${t('explore.title')} -  InfraHive`;
+      (async () => {
+        const { accounts } = await fetchMembers({ url: '/workspaces/current/members', params: {} })
+        if (!accounts)
+          return
+        const currUser = accounts.find(account => account.id === userProfile.id)
+        setHasEditPermission(currUser?.role !== 'normal')
+      })()
+    }
+  }, [pathname])
   return (
     <Box>
 
@@ -167,6 +192,19 @@ const SideBar = (props: SidebarProps) => {
                 </Link>
               </div>
             })}
+            {pathname === '/explore/apps' && <div className="border-t"><ExploreContext.Provider
+              value={
+                {
+                  controlUpdateInstalledApps,
+                  setControlUpdateInstalledApps,
+                  hasEditPermission,
+                  installedApps,
+                  setInstalledApps,
+                }
+              }
+            >
+              <Sidebar controlUpdateInstalledApps={controlUpdateInstalledApps} />
+            </ExploreContext.Provider></div>}
           </div>
 
           <div className='flex flex-col'>
@@ -174,6 +212,7 @@ const SideBar = (props: SidebarProps) => {
           </div>
 
         </Box>
+
       </Drawer >
       <Box ml={30}>
         {props.children}

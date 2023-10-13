@@ -46,6 +46,7 @@ const Apps: FC = () => {
       message: t('common.api.success'),
     })
     setControlUpdateInstalledApps(Date.now())
+    router.refresh()
   }
 
   const [currApp, setCurrApp] = React.useState<App | null>(null)

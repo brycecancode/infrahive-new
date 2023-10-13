@@ -241,10 +241,11 @@ const FileUploader = ({
 
   if (isWebsite) {
     return <div className='mb-10'>
-      <div className='flex  py-10'>
+      <div className='flex  pt-4 pb-0'>
         <TextField id="outlined-basic" label="Website Link" variant="outlined" value={website} onChange={e => setWebsite(e.target.value)} fullWidth size='small' />
         <Button type='primary' className="ml-5" onClick={onAddWebsite} loading={isLoading}>Add</Button>
       </div>
+      <span className='text-slate-700 pb-10' style={{ fontSize: '10px' }}>The import works good on website with more content like wikipedia or blogs.</span>
       <div className={s.fileList}>
         {fileList.map((fileItem, index) => (
           <div
